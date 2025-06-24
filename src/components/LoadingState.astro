@@ -1,0 +1,36 @@
+<div class="animate-pulse transition-opacity duration-300 ease-out">
+    <div class="container mx-auto px-4 py-8">
+        <div class="h-10 bg-gray-200 rounded-lg w-3/4 mx-auto mb-8"></div>
+        
+        <div class="mb-6 flex justify-center sm:justify-start relative">
+            <div class="w-full sm:w-64 h-12 bg-gray-200 rounded-xl"></div>
+        </div>
+
+        <div class="-mx-4 sm:mx-0">
+            <div class="overflow-hidden border border-gray-200 sm:rounded-lg shadow-sm bg-white">
+                <div class="min-w-full divide-y divide-gray-200">
+                    <div class="bg-gray-50 h-12 flex">
+                        {[...Array(5)].map(() => (
+                            <div class="flex-1 px-4 sm:px-6 py-3">
+                                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                            </div>
+                        ))}
+                    </div>
+                    <div class="bg-white divide-y divide-gray-200">
+                        {[...Array(5)].map(() => (
+                            <div class="flex items-center h-[72px]">
+                                <div class="flex-1 px-4 sm:px-6 py-3 flex items-center space-x-4">
+                                    <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+                                    <div class="flex-1">
+                                        <div class="h-4 bg-gray-200 rounded w-1/4 mb-2"></div>
+                                        <div class="h-3 bg-gray-200 rounded w-3/4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

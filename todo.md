@@ -1,0 +1,4 @@
+# TODOs
+
+- pagination
+- search

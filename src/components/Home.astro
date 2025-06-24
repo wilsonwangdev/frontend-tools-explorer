@@ -1,0 +1,194 @@
+---
+import ToolCard from './ToolCard.astro';
+import LoadingState from './LoadingState.astro';
+import { tools } from '../data';
+import type { Tool } from '../data';
+
+// Get unique categories for filter dropdown
+const categories = ['All', ...new Set(tools.map(tool => tool.category))];
+---e
+<div id="app" class="container mx-auto px-4 py-8 font-inter">
+    {/* 使用 client:load 指令实现客户端加载 */}
+    <div id="loadingState" class="block transition-opacity duration-500 ease-in-out">
+        <LoadingState />
+    </div>
+
+    <div id="mainContent" class="hidden opacity-0 transition-all duration-300 ease-out transform translate-y-0">
+    <h1 class="text-4xl font-rubik font-bold text-center mb-8 text-gray-800">Frontend Development Tools</h1>
+    
+    <div class="mb-6 flex justify-center sm:justify-start relative">
+        <div class="relative w-full sm:w-64 group">
+            <select 
+                id="categoryFilter" 
+                class="appearance-none w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-10 text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400 transition-colors duration-200 font-medium"
+                aria-label="Filter tools by category"
+            >
+                {categories.map(category => (
+                    <option value={category} class="py-2 font-medium">{category}</option>
+                ))}
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 group-hover:text-gray-700 transition-colors duration-200">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 group-hover:text-gray-700 transition-colors duration-200">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="-mx-4 sm:mx-0">
+        <div class="overflow-x-auto">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden border border-gray-200 sm:rounded-lg shadow-sm bg-white">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Description</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Category</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Links</th>
+                            </tr>
+                        </thead>
+                        <tbody id="toolsTableBody" class="bg-white divide-y divide-gray-200 [&>tr]:h-[72px]">
+                            {tools.map(tool => (
+                                <ToolCard 
+                                    icon={tool.icon}
+                                    name={tool.name}
+                                    description={tool.description}
+                                    category={tool.category}
+                                    docsLink={tool.docsLink}
+                                    githubLink={tool.githubLink}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 初始化加载状态处理函数
+    function initializeLoadingState() {
+        // 在页面加载完成后执行过渡
+        const loadingState = document.getElementById('loadingState');
+        const mainContent = document.getElementById('mainContent');
+
+        if (!loadingState || !mainContent) {
+            console.warn('Required elements not found');
+            return;
+        }
+
+        // 设置最小加载时间以避免闪烁
+        const MIN_LOADING_TIME = 500;
+        const startTime = Date.now();
+
+        // 定义过渡动画函数
+        const performTransition = () => {
+            if (loadingState) {
+                loadingState.classList.add('opacity-0');
+                setTimeout(() => {
+                    loadingState.style.display = 'none';
+                    if (mainContent) {
+                        mainContent.style.display = 'block';
+                        mainContent.classList.remove('hidden');
+                        requestAnimationFrame(() => {
+                            mainContent.classList.add('opacity-100');
+                            mainContent.classList.remove('translate-y-0');
+                        });
+                    }
+                }, 300);
+            }
+
+        };
+
+        // 等待资源加载完成
+        Promise.all([
+            new Promise(resolve => setTimeout(resolve, MIN_LOADING_TIME)),
+            Promise.all(
+                Array.from(document.images)
+                    .filter(img => !img.complete)
+                    .map(img => new Promise((resolve, reject) => {
+                        img.onload = () => resolve(img);
+                        img.onerror = () => {
+                            console.warn(`Failed to load image: ${img.src}`);
+                            resolve(img); // Continue loading other images
+                        };
+                    }))
+            )
+        ]).then(() => {
+            // 确保过渡动画平滑执行
+            const timeElapsed = Date.now() - startTime;
+            if (timeElapsed >= MIN_LOADING_TIME) {
+                performTransition();
+            } else {
+                setTimeout(performTransition, MIN_LOADING_TIME - timeElapsed);
+            }
+        }).catch(error => {
+            console.error('Error during loading:', error);
+            // 即使出错也要显示主内容
+            performTransition();
+        });
+    }
+
+    // 如果 DOMContentLoaded 已经触发，立即初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeLoadingState);
+    } else {
+        initializeLoadingState();
+    }
+</script>
+
+<script>
+    const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+    const toolsTableBody = document.getElementById('toolsTableBody') as HTMLTableSectionElement;
+
+    function filterTools() {
+        if (!categoryFilter || !toolsTableBody) return;
+
+        const selectedCategory = categoryFilter.value;
+        const rows = toolsTableBody.getElementsByTagName('tr');
+
+        Array.from(rows).forEach((row: HTMLTableRowElement) => {
+            const categoryCell = row.querySelector('td:nth-child(4)');
+            if (!categoryCell) return;
+
+            const rowCategory = categoryCell.textContent?.trim() || '';
+            const shouldShow = selectedCategory === 'All' || rowCategory === selectedCategory;
+
+            row.classList.toggle('hidden', !shouldShow);
+            if (shouldShow) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    categoryFilter?.addEventListener('change', filterTools);
+    // Initial filter if elements exist
+    if (categoryFilter && toolsTableBody) {
+        filterTools();
+    }
+</script>
+
+<style is:global>
+    /* Import Inter font for UI */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    /* Import Rubik for headings */
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
+
+    .font-inter {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .font-rubik {
+        font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+    }
+</style>
