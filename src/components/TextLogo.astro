@@ -1,0 +1,87 @@
+---
+// TextLogo.astro - A simple text-based logo component
+// This replaces the complex SVG logo with a more reliable text-based alternative
+---
+
+<div class="text-logo">
+  <div class="logo-container">
+    <div class="logo-icon">
+      <span class="code-bracket">{"<"}</span>
+      <span class="lightning">⚡</span>
+      <span class="code-bracket">{">"}</span>
+    </div>
+    <div class="logo-text">
+      <h1 class="brand-name">Frontend Tools Explorer</h1>
+      <p class="tagline">Discover the best frontend development tools</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .text-logo {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .code-bracket {
+    color: #4f46e5;
+  }
+
+  .lightning {
+    color: #7c3aed;
+    margin: 0 0.25rem;
+  }
+
+  .brand-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+  }
+
+  @media (min-width: 640px) {
+    .logo-container {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .logo-icon {
+      margin-right: 1.5rem;
+      margin-bottom: 0;
+      font-size: 2.5rem;
+    }
+
+    .brand-name {
+      font-size: 3rem;
+    }
+  }
+</style>

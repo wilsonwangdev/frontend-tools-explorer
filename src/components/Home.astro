@@ -2,6 +2,7 @@
 import ToolCard from './ToolCard.astro';
 import LoadingState from './LoadingState.astro';
 import Footer from './Footer.astro';
+import TextLogo from './TextLogo.astro';
 import { tools } from '../data';
 import { BRAND_NAME } from '../constants/brand';
 
@@ -48,9 +49,10 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             transform: translateY(0) scale(1) !important;
         }
     </style>
-    <h1 class="text-4xl font-rubik font-bold text-center mb-8 text-gray-800">
-        {BRAND_NAME}
-    </h1>
+    <!-- Replace text-only brand name with the new TextLogo component -->
+    <div class="mb-8">
+        <TextLogo />
+    </div>
     
     <div class="mb-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start relative">
         <div class="relative w-full sm:w-64 group">
