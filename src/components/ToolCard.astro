@@ -36,7 +36,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*
         ) : null
       ) : icon ? (
         <img
-          src={icon}
+          data-src={icon}
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
           alt={`${name} icon`}
           width={32}
           height={32}

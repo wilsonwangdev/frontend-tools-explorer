@@ -1,0 +1,17 @@
+---
+// Import package.json data for version
+const packageJson = await import('../../package.json');
+const version = packageJson.default.version;
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className = "mt-12 pb-6 text-center text-gray-500 text-sm"
+} = Astro.props;
+---
+
+<footer class={className}>
+    <div>v{version} &copy; {new Date().getFullYear()} Frontend Tools Explorer</div>
+</footer>
