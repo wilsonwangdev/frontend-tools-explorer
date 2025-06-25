@@ -1,16 +1,18 @@
 ---
+import { BRAND_NAME } from '../constants/brand';
+
 interface Props {
 	title?: string;
 }
 
-const { title = "Frontend Tools Explorer" } = Astro.props;
+const { title = BRAND_NAME } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="A comprehensive collection of modern frontend development tools and frameworks" />
+		<meta name="description" content="A comprehensive collection of modern frontend development tools and frameworks. Enhance your development workflow with a curated selection of tools, libraries, and resources." />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />

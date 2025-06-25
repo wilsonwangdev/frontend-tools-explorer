@@ -1,19 +1,21 @@
-import type { Tool } from '../types';
+import type { Tool } from "../types";
 
 // Import individual tool configurations
-import { rolldown } from './rolldown';
-import { oxc } from './oxc';
-import { rspack } from './rspack';
-import { rsbuild } from './rsbuild';
-import { vitest } from './vitest';
-import { npm } from './npm';
-import { react } from './react';
-import { vue } from './vue';
-import { nodejs } from './nodejs';
-import { deno } from './deno';
-import { bun } from './bun';
-import { pnpm } from './pnpm';
-import { yarn } from './yarn';
+import { rolldown } from "./rolldown";
+import { oxc } from "./oxc";
+import { rspack } from "./rspack";
+import { rsbuild } from "./rsbuild";
+import { vitest } from "./vitest";
+import { npm } from "./npm";
+import { react } from "./react";
+import { vue } from "./vue";
+import { nodejs } from "./nodejs";
+import { deno } from "./deno";
+import { bun } from "./bun";
+import { pnpm } from "./pnpm";
+import { yarn } from "./yarn";
+import { vite } from "./vite";
+import { rslib } from "./rslib";
 
 // Export all tools
 export const tools: Tool[] = [
@@ -29,5 +31,7 @@ export const tools: Tool[] = [
   deno,
   bun,
   pnpm,
-  yarn
+  yarn,
+  vite,
+  rslib,
 ];

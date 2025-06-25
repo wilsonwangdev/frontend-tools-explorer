@@ -1,13 +1,13 @@
 import type { Tool } from "../types";
 
-export const yarn: Tool = {
-  name: 'Yarn',
+export const vite: Tool = {
+  name: 'Vite',
   description: 'Fast, reliable, and secure dependency management',
-  icon: 'local',
+  icon: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Vitejs-logo.svg?v=1',
   category: 'Package Manager',
-  docsLink: 'https://yarnpkg.com',
-  githubLink: 'https://github.com/yarnpkg/yarn',
-  maintainer: 'Meta',
+  docsLink: 'https://vitejs.dev',
+  githubLink: 'https://github.com/vitejs/vite',
+  maintainer: 'Evan You',
   language: 'TypeScript',
   features: ['Workspaces', 'Plug\'n\'Play', 'Zero-Installs', 'Constraints']
 };

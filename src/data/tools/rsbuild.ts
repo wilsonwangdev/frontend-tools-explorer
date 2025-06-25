@@ -1,7 +1,7 @@
 import type { Tool } from '../types';
 
 export const rsbuild: Tool = {
-  icon: '',
+  icon: 'local',
   name: 'Rsbuild',
   description: 'A Rspack-based build tool that provides out-of-box build capabilities with enhanced developer experience',
   category: 'Build Tool',

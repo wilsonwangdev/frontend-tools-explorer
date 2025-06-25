@@ -9,10 +9,11 @@ export type ToolCategory =
   | 'CSS Framework'
   | 'Testing'
   | 'Linter & Formatter'
-  | 'JavaScript Tools';
+  | 'JavaScript Tools'
+  | 'Other';
 
 export interface Tool {
-  icon: string;
+  icon: 'local' | `https://${string}` | `http://${string}`;
   name: string;
   description: string;
   category: ToolCategory;

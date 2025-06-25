@@ -1,8 +1,9 @@
 ---
 import Home from '../components/Home.astro';
 import Layout from '../layouts/Layout.astro';
+import { BRAND_NAME } from '../constants/brand';
 ---
 
-<Layout title="Frontend Tools Explorer">
+<Layout title={BRAND_NAME}>
 	<Home />
 </Layout>

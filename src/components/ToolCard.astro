@@ -10,7 +10,15 @@ const { icon, name, description, category, docsLink, githubLink } = Astro.props;
 <tr class="hover:bg-gray-50">
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
     <div class="w-8 h-8 flex items-center justify-center">
-      {icon ? (
+      {icon === 'local' ? (
+        <img
+          src={`/src/assets/icons/${name.toLowerCase()}.svg`}
+          alt={`${name} icon`}
+          width={24}
+          height={24}
+          class="w-6 h-6 object-contain"
+        />
+      ) : icon ? (
         <img
           src={icon}
           alt={`${name} icon`}

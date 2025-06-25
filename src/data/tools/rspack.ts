@@ -1,7 +1,7 @@
 import type { Tool } from '../types';
 
 export const rspack: Tool = {
-  icon: '',
+  icon: 'local',
   name: 'Rspack',
   description: 'Fast Rust-based bundler with webpack compatibility, designed for high-performance JavaScript bundling',
   category: 'Bundler',
