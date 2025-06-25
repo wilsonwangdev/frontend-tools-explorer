@@ -5,7 +5,7 @@ export const vitepress: Tool = {
   name: "VitePress",
   description: "A Vite-based static site generator",
   category: "Static Site Generator",
-  docsLink: "https://vitepress.vuejs.org/",
+  docsLink: "https://vitepress.dev",
   githubLink: "https://github.com/vuejs/vitepress",
   maintainer: "Vue.js Team",
   language: "TypeScript",

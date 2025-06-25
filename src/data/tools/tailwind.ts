@@ -5,7 +5,7 @@ export const tailwind: Tool = {
   name: "Tailwind CSS",
   description: "A utility-first CSS framework for rapid UI development",
   category: "CSS Framework",
-  docsLink: "https://tailwindcss.com/docs",
+  docsLink: "https://tailwindcss.com/",
   githubLink: "https://github.com/tailwindlabs/tailwindcss",
   maintainer: "Tailwind Labs",
   language: "CSS",

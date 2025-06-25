@@ -6,6 +6,7 @@ export type ToolCategory =
   | 'Testing Framework'
   | 'Build Tool'
   | 'Monorepo Tool'
+  | 'Library Development Tool'
   | 'Bundler'
   | 'Framework'
   | 'SSR Framework'

@@ -5,7 +5,7 @@ export const esbuild: Tool = {
   name: 'Esbuild',
   description: 'A fast bundler and minifier for JavaScript and TypeScript',
   category: 'Build Tool',
-  docsLink: 'https://esbuild.dev',
+  docsLink: 'https://esbuild.github.io/',
   githubLink: 'https://github.com/evanw/esbuild',
   maintainer: 'Evan You',
   language: 'TypeScript',

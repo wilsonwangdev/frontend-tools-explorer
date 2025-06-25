@@ -5,7 +5,7 @@ export const oxc: Tool = {
   name: 'Oxc',
   description: 'Collection of high-performance JavaScript tools including parser, transformer, resolver, and minifier',
   category: 'JavaScript Tools',
-  docsLink: 'https://oxc-project.github.io',
+  docsLink: 'https://oxc.rs/',
   githubLink: 'https://github.com/oxc-project/oxc',
   maintainer: 'VoidZero',
   language: 'Rust',
