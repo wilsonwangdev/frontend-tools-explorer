@@ -17,7 +17,7 @@ import { yarn } from "./yarn";
 import { vite } from "./vite";
 import { rslib } from "./rslib";
 
-// Export all tools
+// Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
   rolldown,
   oxc,
@@ -34,4 +34,4 @@ export const tools: Tool[] = [
   yarn,
   vite,
   rslib,
-];
+].sort((a, b) => a.name.localeCompare(b.name));
