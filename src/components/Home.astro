@@ -13,7 +13,30 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         <LoadingState />
     </div>
 
-    <div id="mainContent" class="hidden opacity-0 transition-all duration-300 ease-out transform translate-y-0">
+    <!-- Add a noscript fallback to ensure content is visible without JavaScript -->
+    <noscript>
+        <style>
+            #loadingState { display: none !important; }
+            #mainContent { 
+                display: block !important; 
+                opacity: 1 !important; 
+                transform: translateY(0) !important;
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
+
+    <div id="mainContent" class="block opacity-100 transition-all duration-300 ease-out transform translate-y-0">
+    <script>
+        // Hide content initially and let the loading animation show
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.classList.remove('block', 'opacity-100', 'translate-y-0');
+                mainContent.classList.add('hidden', 'opacity-0', 'translate-y-4');
+            }
+        });
+    </script>
     <h1 class="text-4xl font-rubik font-bold text-center mb-8 text-gray-800">
         {BRAND_NAME}
     </h1>
@@ -25,6 +48,8 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
                 id="searchInput"
                 placeholder="Search tools..."
                 class="w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400 transition-colors duration-200"
+                aria-label="Search for tools"
+                autocomplete="off"
             />
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +84,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden border border-gray-200 sm:rounded-lg shadow-sm bg-white">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200" role="grid" aria-label="Frontend tools list">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
@@ -91,7 +116,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
 <script>
     // Initialize loading state handler
     function initializeLoadingState() {
-        // 在页面加载完成后执行过渡
+        // After page load, execute transition
         const loadingState = document.getElementById('loadingState');
         const mainContent = document.getElementById('mainContent');
 
@@ -99,6 +124,21 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             console.warn('Required elements not found');
             return;
         }
+        
+        // Set a timeout to ensure content is shown even if loading takes too long
+        const maxLoadingTime = 3000; // 3 seconds max loading time
+        const forceShowTimeout = setTimeout(() => {
+            console.log('Force showing content due to timeout');
+            loadingState.style.display = 'none';
+            mainContent.style.display = 'block';
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('opacity-100');
+            mainContent.classList.add('translate-y-0');
+            mainContent.classList.remove('translate-y-4');
+        }, maxLoadingTime);
+        
+        // Setup keyboard navigation for tool cards
+        setupKeyboardNavigation();
 
         // Initialize search and filter functionality
         const searchInput = document.getElementById('searchInput') as HTMLInputElement;
@@ -144,6 +184,9 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         const startTime = Date.now();
 
         const performTransition = () => {
+            // Clear the force show timeout since we're transitioning normally
+            clearTimeout(forceShowTimeout);
+            
             if (loadingState) {
                 loadingState.classList.add('opacity-0');
                 setTimeout(() => {
@@ -152,13 +195,18 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
                         mainContent.style.display = 'block';
                         mainContent.classList.remove('hidden');
                         requestAnimationFrame(() => {
-                            mainContent.classList.add('opacity-100');
-                            mainContent.classList.remove('translate-y-0');
+                            // Add a small delay to ensure the browser registers the display change
+                            setTimeout(() => {
+                                mainContent.classList.add('opacity-100');
+                                mainContent.classList.remove('opacity-0');
+                                mainContent.classList.add('translate-y-0');
+                                mainContent.classList.remove('translate-y-4');
+                                console.log('Content should be visible now');
+                            }, 10);
                         });
                     }
                 }, 300);
             }
-
         };
 
         Promise.all([
@@ -183,7 +231,44 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             }
         }).catch(error => {
             console.error('Error during loading:', error);
+            // Fallback: Show content directly if loading fails
+            if (mainContent) {
+                loadingState?.style.setProperty('display', 'none');
+                mainContent.style.display = 'block';
+                mainContent.classList.remove('hidden');
+                mainContent.classList.add('opacity-100');
+                mainContent.classList.add('translate-y-0');
+                mainContent.classList.remove('translate-y-4');
+            }
             performTransition();
+        });
+    }
+
+    // Setup keyboard navigation for tool cards
+    function setupKeyboardNavigation() {
+        const toolRows = document.querySelectorAll('#toolsTableBody tr');
+        
+        toolRows.forEach((row, index) => {
+            (row as HTMLElement).addEventListener('keydown', (e: KeyboardEvent) => {
+                // Handle Enter key to activate links
+                if (e.key === 'Enter') {
+                    const docsLink = row.querySelector('a[aria-label*="documentation"]') as HTMLAnchorElement;
+                    if (docsLink) {
+                        docsLink.click();
+                    }
+                }
+                
+                // Handle arrow keys for navigation
+                if (e.key === 'ArrowDown' && index < toolRows.length - 1) {
+                    e.preventDefault();
+                    (toolRows[index + 1] as HTMLElement).focus();
+                }
+                
+                if (e.key === 'ArrowUp' && index > 0) {
+                    e.preventDefault();
+                    (toolRows[index - 1] as HTMLElement).focus();
+                }
+            });
         });
     }
 
@@ -192,6 +277,11 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
     } else {
         initializeLoadingState();
     }
+    
+    // Re-initialize keyboard navigation after view transitions
+    document.addEventListener('astro:page-load', function() {
+        setupKeyboardNavigation();
+    });
 </script>
 
 <script>

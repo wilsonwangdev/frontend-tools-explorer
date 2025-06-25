@@ -7,3 +7,23 @@ import { BRAND_NAME } from '../constants/brand';
 <Layout title={BRAND_NAME}>
 	<Home />
 </Layout>
+
+<script>
+	// Ensure content is visible after a short delay
+	document.addEventListener('DOMContentLoaded', () => {
+		setTimeout(() => {
+			const loadingState = document.getElementById('loadingState');
+			const mainContent = document.getElementById('mainContent');
+			
+			if (loadingState && mainContent) {
+				console.log('Forcing content visibility from index.astro');
+				loadingState.style.display = 'none';
+				mainContent.style.display = 'block';
+				mainContent.classList.remove('hidden');
+				mainContent.classList.add('opacity-100');
+				mainContent.classList.add('translate-y-0');
+				mainContent.classList.remove('translate-y-4');
+			}
+		}, 1000);
+	});
+</script>

@@ -6,7 +6,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   image: {
-    // 启用内置的图片优化功能
+    // Enable built-in image optimization
     domains: [
       'rspack.dev',
       'static.npmjs.com',
@@ -14,5 +14,9 @@ export default defineConfig({
       'vuejs.org',
       'raw.githubusercontent.com'
     ]
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
   }
 });

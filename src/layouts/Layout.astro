@@ -1,5 +1,6 @@
 ---
 import { BRAND_NAME } from '../constants/brand';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title?: string;
@@ -17,8 +18,92 @@ const { title = BRAND_NAME } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ClientRouter fallback="swap" />
+		<style is:global>
+			/* Add loading indicator for view transitions */
+			.astro-loading-indicator {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 3px;
+				background: linear-gradient(90deg, #4f46e5, #818cf8);
+				transform: scaleX(0);
+				transform-origin: 0% 0%;
+				z-index: 9999;
+				opacity: 0;
+				transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+			}
+			
+			:root.astro-loading .astro-loading-indicator {
+				opacity: 1;
+				transform: scaleX(0.5);
+			}
+			
+			:root.astro-loading.astro-loading-done .astro-loading-indicator {
+				transform: scaleX(1);
+				opacity: 0;
+			}
+			
+			/* Improve focus styles for accessibility */
+			:focus-visible {
+				outline: 2px solid #4f46e5;
+				outline-offset: 2px;
+			}
+		</style>
 	</head>
 	<body class="min-h-screen bg-gray-50">
-		<slot />
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">
+			Skip to content
+		</a>
+		<div class="astro-loading-indicator" aria-hidden="true"></div>
+		<main id="main-content">
+			<slot />
+		</main>
+		<script>
+			// Handle loading indicator
+			document.addEventListener('astro:before-preparation', () => {
+				document.documentElement.classList.add('astro-loading');
+			});
+			
+			document.addEventListener('astro:after-preparation', () => {
+				document.documentElement.classList.add('astro-loading-done');
+			});
+			
+			document.addEventListener('astro:page-load', () => {
+				// Reset loading state
+				setTimeout(() => {
+					document.documentElement.classList.remove('astro-loading', 'astro-loading-done');
+				}, 300);
+				
+				// Announce page changes to screen readers
+				const pageTitle = document.title;
+				const announcer = document.getElementById('announcer') || document.createElement('div');
+				if (!document.getElementById('announcer')) {
+					announcer.id = 'announcer';
+					announcer.setAttribute('aria-live', 'assertive');
+					announcer.setAttribute('aria-atomic', 'true');
+					announcer.className = 'sr-only';
+					document.body.appendChild(announcer);
+				}
+				announcer.textContent = `Navigated to ${pageTitle}`;
+				
+				// Ensure content is visible
+				const loadingState = document.getElementById('loadingState');
+				const mainContent = document.getElementById('mainContent');
+				
+				if (loadingState && mainContent) {
+					// Force content to be visible after page load
+					setTimeout(() => {
+						loadingState.style.display = 'none';
+						mainContent.style.display = 'block';
+						mainContent.classList.remove('hidden');
+						mainContent.classList.add('opacity-100');
+						mainContent.classList.add('translate-y-0');
+						mainContent.classList.remove('translate-y-4');
+					}, 500);
+				}
+			});
+		</script>
 	</body>
 </html>
