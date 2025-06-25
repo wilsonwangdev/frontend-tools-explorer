@@ -123,8 +123,22 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         }
 
         searchInput?.addEventListener('input', filterTools);
-
         categoryFilter?.addEventListener('change', filterTools);
+
+        // Add click handlers for category cells
+        toolRows.forEach(row => {
+            const categoryCell = row.querySelector('td:nth-child(4)');
+            if (categoryCell) {
+                categoryCell.classList.add('cursor-pointer', 'hover:bg-gray-50', 'transition-colors', 'duration-150');
+                categoryCell.addEventListener('click', () => {
+                    const category = categoryCell.textContent?.trim() || '';
+                    if (categoryFilter) {
+                        categoryFilter.value = category;
+                        filterTools();
+                    }
+                });
+            }
+        });
 
         const MIN_LOADING_TIME = 500;
         const startTime = Date.now();
