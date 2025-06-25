@@ -18,7 +18,20 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         {BRAND_NAME}
     </h1>
     
-    <div class="mb-6 flex justify-center sm:justify-start relative">
+    <div class="mb-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start relative">
+        <div class="relative w-full sm:w-64 group">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search tools..."
+                class="w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400 transition-colors duration-200"
+            />
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+        </div>
         <div class="relative w-full sm:w-64 group">
             <select 
                 id="categoryFilter" 
@@ -76,7 +89,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
 </div>
 
 <script>
-    // 初始化加载状态处理函数
+    // Initialize loading state handler
     function initializeLoadingState() {
         // 在页面加载完成后执行过渡
         const loadingState = document.getElementById('loadingState');
@@ -86,6 +99,32 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             console.warn('Required elements not found');
             return;
         }
+
+        // Initialize search and filter functionality
+        const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+        const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+        const toolsTableBody = document.getElementById('toolsTableBody');
+        const toolRows = Array.from(toolsTableBody?.getElementsByTagName('tr') || []);
+
+        function filterTools() {
+            const searchTerm = searchInput?.value?.toLowerCase().trim() || '';
+            const selectedCategory = categoryFilter?.value || 'All';
+
+            toolRows.forEach(row => {
+                const name = row.querySelector('td:nth-child(2)')?.textContent?.toLowerCase() || '';
+                const description = row.querySelector('td:nth-child(3)')?.textContent?.toLowerCase() || '';
+                const category = row.querySelector('td:nth-child(4)')?.textContent?.trim() || '';
+
+                const matchesSearch = searchTerm === '' || name.includes(searchTerm);
+                const matchesCategory = selectedCategory === 'All' || category === selectedCategory;
+
+                row.style.display = matchesSearch && matchesCategory ? '' : 'none';
+            });
+        }
+
+        searchInput?.addEventListener('input', filterTools);
+
+        categoryFilter?.addEventListener('change', filterTools);
 
         const MIN_LOADING_TIME = 500;
         const startTime = Date.now();
