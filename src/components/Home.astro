@@ -10,7 +10,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
 ---
 
 <div id="app" class="container mx-auto px-4 py-8 font-inter">
-    <div id="loadingState" class="block transition-opacity duration-500 ease-in-out">
+    <div id="loadingState" class="block transition-opacity duration-700 ease-in-out">
         <LoadingState />
     </div>
 
@@ -28,7 +28,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         </style>
     </noscript>
 
-    <div id="mainContent" class="hidden opacity-0 transition-all duration-500 ease-out transform translate-y-0">
+    <div id="mainContent" class="hidden opacity-0 transition-all duration-700 ease-in-out transform translate-y-8 scale-[0.98]">
     <style>
         /* Ensure the content is fully rendered in memory but not visible */
         #mainContent {
@@ -36,7 +36,8 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             top: 0;
             left: 0;
             right: 0;
-            visibility: hidden;            z-index: -1; /* Ensure it's behind the loading state */
+            visibility: hidden;
+            z-index: -1; /* Ensure it's behind the loading state */
         }
         
         /* When content is ready to be shown */
@@ -44,6 +45,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             position: relative;
             visibility: visible;
             z-index: 1; /* Bring it to the front when visible */
+            transform: translateY(0) scale(1) !important;
         }
     </style>
     <h1 class="text-4xl font-rubik font-bold text-center mb-8 text-gray-800">
@@ -236,7 +238,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             }
         });
 
-        const MIN_LOADING_TIME = 500;
+        const MIN_LOADING_TIME = 800;
         const startTime = Date.now();
 
         const performTransition = () => {
@@ -254,18 +256,20 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
                     // Start fading out loading state
                     loadingState.classList.add('opacity-0');
                     
-                    // Start fading in content simultaneously
-                    requestAnimationFrame(() => {
+                    // Start fading in content with a slight delay for a smoother handoff
+                    setTimeout(() => {
                         mainContent.classList.add('opacity-100');
                         mainContent.classList.remove('opacity-0');
-                    });
+                        // Apply transform changes for a smooth animation
+                        mainContent.style.transform = 'translateY(0) scale(1)';
+                    }, 150);
                     
                     // After transition completes, hide loading state completely
                     setTimeout(() => {
                         loadingState.style.display = 'none';
                         console.log('Transition complete - content visible');
-                    }, 300);
-                }, 50);
+                    }, 700);
+                }, 100);
             }
         };
 
