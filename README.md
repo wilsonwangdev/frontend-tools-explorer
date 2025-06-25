@@ -6,11 +6,11 @@
 
 **A comprehensive, searchable directory of modern frontend development tools and libraries.**
 
-[![Built with Astro](https://astro.badgen.dev/v1)](https://astro.build)
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/small.svg)](https://astro.build)
 [![Styled with Tailwind CSS](https://img.shields.io/badge/Styled%20with-Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![GitHub](https://img.shields.io/github/license/wilsonwangdev/frontend-tools-explorer?color=blue)](https://github.com/wilsonwangdev/frontend-tools-explorer/blob/main/LICENSE)
 
-[View Demo](https://frontend-tools-explorer.vercel.app) | [Report Bug](https://github.com/wilsonwangdev/frontend-tools-explorer/issues) | [Request Feature](https://github.com/wilsonwangdev/frontend-tools-explorer/issues)
+[View Demo](https://frontend-tools-explorer.vercel.app) | [Report Bug](https://github.com/wilsonwangdev/frontend-tools-explorer/issues) | [Request Feature](https://github.com/wilsonwangdev/frontend-tools-explorer/pulls)
 
 </div>
 
@@ -51,12 +51,14 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
 ### Installation
 
 1. Clone the repository
+
    ```sh
    git clone https://github.com/wilsonwangdev/frontend-tools-explorer.git
    cd frontend-tools-explorer
    ```
 
 2. Install dependencies
+
    ```sh
    npm install
    # or
@@ -66,6 +68,7 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
    ```
 
 3. Start the development server
+
    ```sh
    npm run dev
    # or

@@ -67,7 +67,7 @@ export const toolName: Tool = {
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/yourusername/frontend-tools-explorer.git
+   git clone https://github.com/wilsonwangdev/frontend-tools-explorer.git
    cd frontend-tools-explorer
    ```
 
