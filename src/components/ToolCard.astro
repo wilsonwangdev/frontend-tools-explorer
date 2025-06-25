@@ -9,22 +9,22 @@ const { icon, name, description, category, docsLink, githubLink } = Astro.props;
 
 <tr class="hover:bg-gray-50">
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-    <div class="w-8 h-8 flex items-center justify-center">
+    <div class="w-10 h-10 flex items-center justify-center">
       {icon === 'local' ? (
         <img
           src={`/src/assets/icons/${name.toLowerCase()}.svg`}
           alt={`${name} icon`}
-          width={24}
-          height={24}
-          class="w-6 h-6 object-contain"
+          width={32}
+          height={32}
+          class="w-8 h-8 object-contain"
         />
       ) : icon ? (
         <img
           src={icon}
           alt={`${name} icon`}
-          width={24}
-          height={24}
-          class="w-6 h-6 object-contain"
+          width={32}
+          height={32}
+          class="w-8 h-8 object-contain"
           crossorigin="anonymous"
         />
       ) : (
@@ -35,8 +35,8 @@ const { icon, name, description, category, docsLink, githubLink } = Astro.props;
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
     <div class="text-sm font-medium text-gray-900">{name}</div>
   </td>
-  <td class="px-4 sm:px-6 py-4 whitespace-normal hidden md:table-cell">
-    <div class="text-sm text-gray-500">{description}</div>
+  <td class="px-4 sm:px-6 py-4 whitespace-normal hidden md:table-cell h-[72px]">
+    <div class="text-sm text-gray-500 line-clamp-2">{description}</div>
   </td>
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
