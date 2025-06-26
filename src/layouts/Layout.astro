@@ -1,13 +1,15 @@
 ---
 import { BRAND_NAME } from '../constants/brand';
 import { ClientRouter } from 'astro:transitions';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
 
 interface Props {
 	title?: string;
+	description?: string;
 }
 
-const { title = BRAND_NAME } = Astro.props;
+const { title = BRAND_NAME, description = 'A curated collection of frontend tools and resources.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -129,12 +131,7 @@ const { title = BRAND_NAME } = Astro.props;
 			Skip to content
 		</a>
 		<div class="astro-loading-indicator" aria-hidden="true"></div>
-		<header class="sticky top-0 z-10 shadow-sm py-2 px-4" style="background-color: var(--color-background-secondary);">
-			<div class="container mx-auto flex justify-between items-center">
-				<div class="text-xl font-bold" style="color: var(--color-text);">{BRAND_NAME}</div>
-				<ThemeToggle />
-			</div>
-		</header>
+		<Header />
 		<main id="main-content">
 			<slot />
 		</main>
