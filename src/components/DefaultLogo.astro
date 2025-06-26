@@ -58,6 +58,6 @@ const firstLetter = text[0].toUpperCase();
 const selectedColor = getColorFromText(text);
 ---
 
-<div class={`w-8 h-8 rounded-md flex items-center justify-center ${selectedColor.bg} transition-transform duration-300 hover:scale-125`}>
+<div class={`w-8 h-8 rounded-md flex items-center justify-center ${selectedColor.bg}`}>
   <span class={`text-sm font-semibold ${selectedColor.text}`}>{firstLetter}</span>
 </div>

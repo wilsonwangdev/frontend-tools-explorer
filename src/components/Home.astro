@@ -98,7 +98,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden border border-gray-200 sm:rounded-lg shadow-sm bg-white">
                     <table class="min-w-full divide-y divide-gray-200" role="grid" aria-label="Frontend tools list">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-100">
                             <tr>
                                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
                                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -107,7 +107,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
                                 <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Links</th>
                             </tr>
                         </thead>
-                        <tbody id="toolsTableBody" class="bg-white divide-y divide-gray-200 [&>tr]:h-[72px]">
+                        <tbody id="toolsTableBody" class="bg-white divide-y divide-gray-200 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50">
                             {/* TODO: Optimize rendering with pagination or lazy loading on scroll for better performance */}
                             {tools.map(tool => (
                                 <ToolCard 
