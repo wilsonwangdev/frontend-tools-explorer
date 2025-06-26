@@ -41,6 +41,7 @@ import { jest } from "./jest";
 import { playwright } from "./playwright";
 import { cypress } from "./cypress";
 import { webdriverio } from "./webdriverio";
+import { parcel } from "./parcel";
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
@@ -84,4 +85,5 @@ export const tools: Tool[] = [
   playwright,
   cypress,
   webdriverio,
+  parcel,
 ].sort((a, b) => a.name.localeCompare(b.name));
