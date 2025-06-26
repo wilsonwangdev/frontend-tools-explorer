@@ -1,0 +1,5 @@
+# Ignore main README.md which has special formatting for badges and alignment
+README.md
+
+# Ignore node_modules
+node_modules/

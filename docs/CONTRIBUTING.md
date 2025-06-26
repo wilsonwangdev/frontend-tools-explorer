@@ -113,6 +113,17 @@ export const toolName: Tool = {
 
 4. Open your browser and visit `http://localhost:4321`
 
+5. Test your changes locally before submitting a PR
+   ```sh
+   # Run linting checks
+   pnpm lint
+   
+   # Test CI workflow locally
+   ./scripts/test-ci.sh
+   ```
+   
+   > For more details on testing CI locally, see [CI.md](./CI.md#testing-ci-locally).
+
 ## Style Guidelines
 
 ### Code Style

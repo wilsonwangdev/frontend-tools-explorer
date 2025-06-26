@@ -34,14 +34,15 @@ biome format --write .
 
 ## Features Summary
 
-| Feature | Biome |
-|---------|-------|
-| Linting | ✅ |
-| Formatting | ✅ |
-| Astro Support | ⚠️ (partial) |
-| Performance | Very Fast |
-| Editor Integration | ✅ |
-| Configuration | `biome.json` |
+| Feature | Biome | markdownlint-cli2 |
+|---------|-------|------------------|
+| Linting | ✅ | ✅ |
+| Formatting | ✅ | ✅ |
+| Astro Support | ⚠️ (partial) | N/A |
+| Markdown Support | ❌ | ✅ |
+| Performance | Very Fast | Fast |
+| Editor Integration | ✅ | ✅ |
+| Configuration | `biome.json` | `.markdownlint.json` |
 
 ## Automated Checks with Husky and lint-staged
 
@@ -61,13 +62,15 @@ The lint-staged configuration is in `.lintstagedrc.json`:
 ```json
 {
   "*.{js,jsx,ts,tsx}": ["biome check --write", "biome format --write"],
-  "*.astro": ["biome check --write", "biome format --write"]
+  "*.astro": ["biome check --write", "biome format --write"],
+  "*.md": ["markdownlint-cli2 --fix"]
 }
 ```
 
 This ensures that:
 - JavaScript and TypeScript files are linted and formatted
 - Astro files are linted and formatted (to the extent supported by Biome)
+- Markdown files are linted and automatically fixed when possible
 
 ### Benefits
 
@@ -84,25 +87,55 @@ This project uses **Biome** as the linting and formatting tool because:
 3. It offers a Prettier-compatible formatter
 4. It provides excellent performance for JavaScript and TypeScript projects
 
-## Installation
+## Markdown Linting with markdownlint-cli2
 
-Biome is already installed as a dev dependency in this project. You can use it directly through the npm scripts or via the `biome` command:
+In addition to Biome, this project uses [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) to lint and format Markdown documentation files.
+
+### Features
+
+- **Consistent formatting** across all markdown files
+- **Automated fixes** for common issues
+- **Pre-commit checks** to ensure documentation quality
+- **CI integration** to verify documentation in pull requests
+
+### Usage
 
 ```bash
-# Using npm scripts
+# Check markdown files for issues
+pnpm lint:md
+
+# Fix markdown issues automatically where possible
+pnpm lint:md:fix
+```
+
+For more details on the markdown linting setup, see [MARKDOWN-LINTING.md](./MARKDOWN-LINTING.md).
+
+## Installation
+
+Biome and markdownlint-cli2 are already installed as dev dependencies in this project. You can use them directly through the npm scripts or via their respective commands:
+
+```bash
+# Using npm scripts for Biome
 pnpm lint
 pnpm format
 pnpm check
 
+# Using npm scripts for markdownlint
+pnpm lint:md
+pnpm lint:md:fix
+
 # Or directly
 pnpm biome check .
 pnpm biome format .
+pnpm markdownlint-cli2 "**/*.md"
+pnpm markdownlint-cli2 --fix "**/*.md"
 ```
 
 ## Editor Integration
 
-Biome offers a VS Code extension for editor integration:
+Both Biome and markdownlint offer VS Code extensions for editor integration:
 
 - [Biome VS Code Extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)
+- [markdownlint VS Code Extension](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint)
 
-The project's `.vscode/settings.json` is already configured to use Biome when it's installed.
+The project's `.vscode/settings.json` is already configured to use Biome when it's installed. The markdownlint extension will automatically use the project's `.markdownlint.json` configuration.

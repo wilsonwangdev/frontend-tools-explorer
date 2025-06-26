@@ -50,7 +50,7 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
   - v22 LTS (v22.0.0 or newer, also supported v22.17.0)
 - pnpm (v8.0.0 or newer)
 
-> **Note:** This project requires specific Node.js and package manager versions. For more details, see [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md) and [NODE-VERSION.md](./NODE-VERSION.md).
+> **Note:** This project requires specific Node.js and package manager versions. For more details, see [PACKAGE-MANAGER.md](./docs/PACKAGE-MANAGER.md) and [NODE-VERSION.md](./docs/NODE-VERSION.md).
 
 ### Installation
 
@@ -78,7 +78,7 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
    # If needed, install the LTS version from nodejs.org
    ```
 
-   > **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js 20+) to manage pnpm. See [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md) for more details and troubleshooting.
+   > **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js 20+) to manage pnpm. See [PACKAGE-MANAGER.md](./docs/PACKAGE-MANAGER.md) for more details and troubleshooting.
 
 3. Start the development server
 
@@ -109,23 +109,43 @@ To add a new frontend tool to the directory:
 3. Import and add your tool to the array in `src/data/tools/index.ts`
 4. Submit a pull request
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
+Please see [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for detailed contribution guidelines.
+
+## 📚 Documentation
+
+All project documentation is available in the [docs](./docs) directory. This includes:
+
+- [Contributing Guidelines](./docs/CONTRIBUTING.md)
+- [CI Setup](./docs/CI.md)
+- [Linting and Formatting](./docs/LINTING.md)
+- [Markdown Linting](./docs/MARKDOWN-LINTING.md)
+- [Package Manager Configuration](./docs/PACKAGE-MANAGER.md)
+- [Node.js Version Requirements](./docs/NODE-VERSION.md)
+- [Lockfile Management](./docs/LOCKFILE-MANAGEMENT.md)
+- [Image Processing](./docs/IMAGE-PROCESSING.md)
 
 ## 🔄 Continuous Integration
 
 This project uses GitHub Actions for continuous integration to ensure code quality. The CI workflow automatically runs linting and formatting checks on every pull request and push to the main branch.
 
-For more details on the CI setup, troubleshooting common issues, and best practices, see [CI.md](./CI.md).
+You can test the CI workflow locally before pushing changes:
+
+```sh
+# Run the CI test script
+./scripts/test-ci.sh
+```
+
+For more details on the CI setup, troubleshooting common issues, and best practices, see [CI.md](./docs/CI.md).
 
 ### Dependency Management
 
-This project uses pnpm for dependency management and requires proper lockfile handling, especially in CI environments. For guidance on managing the lockfile and resolving common issues, see [LOCKFILE-MANAGEMENT.md](./LOCKFILE-MANAGEMENT.md).
+This project uses pnpm for dependency management and requires proper lockfile handling, especially in CI environments. For guidance on managing the lockfile and resolving common issues, see [LOCKFILE-MANAGEMENT.md](./docs/LOCKFILE-MANAGEMENT.md).
 
 ## 🖼️ Image Processing
 
 This project uses Astro's built-in image optimization with Sharp for processing images. Sharp is required for both local development and Vercel deployment.
 
-For more details on image processing configuration, troubleshooting, and best practices, see [IMAGE-PROCESSING.md](./IMAGE-PROCESSING.md).
+For more details on image processing configuration, troubleshooting, and best practices, see [IMAGE-PROCESSING.md](./docs/IMAGE-PROCESSING.md).
 
 ## 📝 License
 

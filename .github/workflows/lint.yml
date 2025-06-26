@@ -40,3 +40,9 @@ jobs:
 
       - name: Run linting
         run: pnpm biome check .
+        
+      - name: Lint Markdown files
+        run: pnpm lint:md
+        
+      - name: Run all linting checks (combined)
+        run: pnpm lint

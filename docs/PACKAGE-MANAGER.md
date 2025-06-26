@@ -70,7 +70,9 @@ corepack enable
 corepack prepare pnpm@latest --activate
 ```
 
+
 This approach has several advantages:
+
 1. No need to install pnpm globally
 2. Automatically uses the correct version specified in package.json
 3. Built into Node.js 20+
@@ -83,6 +85,7 @@ If you prefer not to use Corepack, you can install pnpm globally:
 ```bash
 npm install -g pnpm
 ```
+
 
 ## Troubleshooting
 
@@ -100,25 +103,30 @@ If you encounter issues related to Node.js version or package manager:
 
 If you encounter network errors when Corepack tries to download pnpm (especially during git commits with Husky):
 
-```
+```text
 Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-8.15.4.tgz.
 Internal Error: Error when performing the request...
 ```
 
+
 Try these solutions:
 
 1. **Install pnpm globally** as a fallback:
+
    ```bash
    npm install -g pnpm@8.15.4
    ```
+
    This is the simplest solution and recommended for most users.
 
 2. **Configure npm registry** if you're behind a proxy or firewall:
+
    ```bash
    npm config set registry https://registry.npmjs.org/
    ```
 
 3. **Disable Husky temporarily** if needed for commits:
+
    ```bash
    git commit --no-verify -m "Your commit message"
    ```

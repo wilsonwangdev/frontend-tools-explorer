@@ -10,10 +10,12 @@ The CI workflow is defined in `.github/workflows/lint.yml` and performs the foll
 
 1. **Checkout Code**: Fetches the repository code with full history for proper lockfile validation
 2. **Setup pnpm**: Installs the pnpm package manager (version 8.15.4)
-3. **Setup Node.js**: Configures Node.js environment (version 22.17.0 LTS) with pnpm caching
+3. **Setup Node.js**: Configures Node.js environment with both Node.js v20 LTS and v22 LTS using a matrix strategy
 4. **Install Dependencies**: Installs project dependencies using pnpm
 5. **Check Formatting**: Verifies code formatting using Biome with `pnpm biome format .`
-6. **Run Linting**: Performs code linting using Biome with `pnpm biome check .`
+6. **Run JavaScript/TypeScript Linting**: Performs code linting using Biome with `pnpm biome check .`
+7. **Run Markdown Linting**: Checks markdown files with `pnpm lint:md`
+8. **Run Combined Linting**: Executes all linting checks with `pnpm lint`
 
 ## Important Notes on Dependency Management
 
@@ -56,6 +58,60 @@ If you encounter dependency-related issues in CI:
 
 For more detailed guidance on lockfile management and troubleshooting, see [LOCKFILE-MANAGEMENT.md](./LOCKFILE-MANAGEMENT.md).
 
+## Testing CI Locally
+
+Before pushing changes to CI configuration or code that might affect CI, it's recommended to test the workflow locally:
+
+### Using the Test Script
+
+We provide a convenient script to test the CI workflow locally:
+
+```bash
+# Make the script executable (if needed)
+chmod +x scripts/test-ci.sh
+
+# Run the test script
+./scripts/test-ci.sh
+```
+
+This script will:
+1. Run all the individual commands from the CI workflow
+2. Optionally run the entire GitHub Actions workflow locally using `act`
+
+### Manual Testing
+
+If you prefer to test manually, follow these steps:
+
+1. **Run the same commands locally** that are executed in the CI workflow:
+   ```bash
+   # Install dependencies (same as CI)
+   pnpm install --no-frozen-lockfile
+   
+   # Check formatting
+   pnpm biome format .
+   
+   # Run JavaScript/TypeScript linting
+   pnpm lint:js
+   
+   # Lint Markdown files
+   pnpm lint:md
+   
+   # Run all linting checks at once
+   pnpm lint
+   ```
+
+2. **Test with multiple Node.js versions** if possible:
+   - Use a version manager like nvm to switch between Node.js versions
+   - Test with both Node.js v20 LTS and v22 LTS as specified in the CI matrix
+
+3. **Use GitHub Actions local runners** for more comprehensive testing:
+   - [act](https://github.com/nektos/act) allows running GitHub Actions workflows locally
+   - Install with: `brew install act` (on macOS)
+   - Run with: `act -j lint` to execute the lint job
+
+4. **Validate workflow files** for syntax errors:
+   - Use the [GitHub Actions Workflow Validator](https://github.com/marketplace/actions/workflow-validator) or online tools
+
 ## Best Practices
 
 1. Always commit the `pnpm-lock.yaml` file to ensure consistent dependencies
@@ -64,3 +120,4 @@ For more detailed guidance on lockfile management and troubleshooting, see [LOCK
 4. When adding new dependencies, update the lockfile by running `pnpm install` and commit the changes
 5. Use `pnpm install --no-frozen-lockfile` in CI environments to prevent lockfile-related failures
 6. If you're experiencing CI failures related to the lockfile, try removing the `--frozen-lockfile` flag in your local environment
+7. Always test CI workflow changes locally before pushing to the repository

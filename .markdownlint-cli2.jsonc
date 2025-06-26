@@ -1,0 +1,14 @@
+{
+  "config": {
+    "extends": ".markdownlint.json",
+    "MD013": false,
+    "MD012": false,
+    "MD047": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "**/node_modules/**", "README.md"],
+  "fix": false,
+  "noProgress": true,
+  "customRules": [],
+  "markdownItPlugins": []
+}
