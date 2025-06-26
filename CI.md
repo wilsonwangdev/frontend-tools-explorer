@@ -10,7 +10,7 @@ The CI workflow is defined in `.github/workflows/lint.yml` and performs the foll
 
 1. **Checkout Code**: Fetches the repository code with full history for proper lockfile validation
 2. **Setup pnpm**: Installs the pnpm package manager (version 8.15.4)
-3. **Setup Node.js**: Configures Node.js environment (version 20.3.0) with pnpm caching
+3. **Setup Node.js**: Configures Node.js environment (version 22.17.0 LTS) with pnpm caching
 4. **Install Dependencies**: Installs project dependencies using pnpm
 5. **Check Formatting**: Verifies code formatting using Biome
 6. **Run Linting**: Performs code linting using Biome
@@ -26,10 +26,12 @@ The CI workflow is configured to handle the pnpm lockfile (`pnpm-lock.yaml`) pro
 
 ### Node.js Version
 
-The project requires Node.js version 20.3.0 or higher, which is specified in:
+The project supports both Node.js v20 LTS and v22 LTS versions, which is specified in:
 
-- `package.json` via the `engines` field
-- `.nvmrc` file for local development with nvm
+- `package.json` via the `engines` field (set to `>=20.0.0`)
+- `.nvmrc` file for local development with nvm (set to `20.19.3` by default)
+
+Both Node.js v20 LTS (Iron) and v22 LTS (Jod) are fully supported. For more information on Node.js version requirements and benefits of using LTS versions, see [NODE-VERSION.md](./NODE-VERSION.md).
 
 ## Troubleshooting CI Issues
 

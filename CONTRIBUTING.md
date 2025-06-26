@@ -64,10 +64,12 @@ export const toolName: Tool = {
 
 ### Prerequisites
 
-- Node.js (v20.3.0 or newer)
+- Node.js LTS:
+  - v20 LTS (v20.0.0 or newer, default v20.19.3)
+  - v22 LTS (v22.0.0 or newer, also supported v22.17.0)
 - pnpm (v8.0.0 or newer)
 
-> **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js 20+) to manage pnpm:
+> **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js) to manage pnpm:
 > ```sh
 > # Enable Corepack
 > corepack enable
@@ -76,7 +78,7 @@ export const toolName: Tool = {
 > corepack prepare pnpm@latest --activate
 > ```
 >
-> For more details on our package manager and Node.js requirements, see [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md).
+> For more details on our package manager and Node.js requirements, see [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md) and [NODE-VERSION.md](./NODE-VERSION.md).
 
 ### Setup Steps
 
@@ -96,6 +98,10 @@ export const toolName: Tool = {
    # Alternative: If you have network issues with Corepack
    npm install -g pnpm@8.15.4
    pnpm install
+   
+   # Note: Ensure you're using Node.js v22 LTS
+   # Check your version with: node -v
+   # If needed, install the LTS version from nodejs.org
    ```
    
    > If you encounter network issues with Corepack during git operations, see the [Troubleshooting section in PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md#troubleshooting).

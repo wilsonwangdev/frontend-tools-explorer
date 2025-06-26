@@ -10,6 +10,10 @@ jobs:
   lint:
     name: Lint and Format Check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['20.19.3', '22.17.0']  # Test with both Node.js v20 LTS and v22 LTS
+      fail-fast: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,10 +26,10 @@ jobs:
           version: 8.15.4  # Using the version from packageManager in package.json
           run_install: false
 
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20.3.0'
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
       - name: Install dependencies

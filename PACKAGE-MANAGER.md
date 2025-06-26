@@ -8,10 +8,21 @@ This project enforces specific requirements for the development environment to e
 
 ### Node.js Version
 
-- **Minimum required version**: v20.3.0
-- **Recommended version**: v22.x (LTS)
+- **Minimum required version**: v20.0.0
+- **Recommended versions**: 
+  - v20.19.3 (LTS - Iron) - Default version in .nvmrc
+  - v22.17.0 (LTS - Jod) - Also fully supported
 
-This requirement is based on Astro's compatibility with Node.js versions. Astro 5.x requires Node.js v20.3.0 or higher.
+This project supports both current LTS (Long Term Support) versions of Node.js for maximum stability and security:
+
+- **Node.js v20 LTS (Iron)**: Active support until April 2025, maintenance until April 2026
+- **Node.js v22 LTS (Jod)**: Active support until October 2025, maintenance until April 2027
+
+Benefits of using the LTS version:
+1. Longer support window with security updates
+2. Greater stability for production environments
+3. Compatibility with the latest dependencies
+4. Performance improvements over previous versions
 
 ### Package Manager
 

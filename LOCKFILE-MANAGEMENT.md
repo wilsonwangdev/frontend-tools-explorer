@@ -43,6 +43,42 @@ Common causes:
 2. Different pnpm versions generating incompatible lockfiles
 3. Merge conflicts in the lockfile that weren't properly resolved
 
+### ERR_PNPM_UNSUPPORTED_ENGINE
+
+This error occurs when there's a mismatch between your Node.js version and what a dependency requires. The error message looks like:
+
+```
+ERR_PNPM_UNSUPPORTED_ENGINE  Unsupported environment (bad pnpm and/or Node.js version)
+
+Your Node version is incompatible with "<package-name>".
+
+Expected version: <expected-version-range>
+Got: <your-version>
+```
+
+Common causes:
+1. Using a Node.js version that's incompatible with a dependency's requirements
+2. Dependencies requiring newer Node.js versions than specified in your project
+3. Outdated dependencies with strict Node.js version requirements
+
+#### Example: nopt Package Requirements
+
+A common example is the `nopt` package (used by many development tools) which requires:
+```
+^18.17.0 || >=20.5.0
+```
+
+If your project uses Node.js v20.3.0 but has dependencies that use `nopt@8.1.0` (directly or indirectly), you'll encounter this error. The solution is to update your Node.js version to v20.5.0 or higher.
+
+### Using LTS Versions
+
+This project now uses Node.js v22 LTS (codename 'Jod'), which provides several benefits for dependency management:
+
+1. **Longer support window**: LTS versions receive security updates and bug fixes for a longer period (30 months total)
+2. **Wider compatibility**: Most npm packages are tested against LTS versions first
+3. **Fewer dependency conflicts**: LTS versions have more stable APIs, reducing the likelihood of compatibility issues
+4. **Predictable upgrade path**: Clear timeline for when to plan the next major version upgrade
+
 ## Best Practices
 
 ### For Local Development
@@ -75,6 +111,8 @@ Common causes:
 
 ## Troubleshooting
 
+### Lockfile Issues
+
 If you encounter lockfile issues:
 
 1. **Update your local environment**:
@@ -99,6 +137,44 @@ If you encounter lockfile issues:
    ```bash
    git add pnpm-lock.yaml
    git commit -m "Update lockfile"
+   ```
+
+### Node.js Version Issues
+
+If you encounter `ERR_PNPM_UNSUPPORTED_ENGINE` errors:
+
+1. **Check your Node.js version**:
+   ```bash
+   node -v
+   ```
+
+2. **Update Node.js to the required LTS version**:
+   - If using nvm:
+     ```bash
+     # Install the required LTS version
+     nvm install 22.17.0  # Current LTS version
+     
+     # Use the installed version
+     nvm use 22.17.0
+     ```
+   - If using Corepack (recommended):
+     ```bash
+     # Enable Corepack if not already enabled
+     corepack enable
+     
+     # Update Node.js using your system's package manager or from nodejs.org
+     ```
+   - If using other Node.js installation methods, download and install the LTS version from [nodejs.org](https://nodejs.org/)
+
+3. **Update project configuration** (if necessary):
+   - Update `.nvmrc` to specify the LTS Node.js version (currently 22.17.0)
+   - Update `engines` field in `package.json` to require Node.js >=22.0.0
+   - Consider adding a note in your README about using the LTS version
+
+4. **Reinstall dependencies with the correct Node.js version**:
+   ```bash
+   rm -rf node_modules
+   pnpm install
    ```
 
 ## Additional Resources
