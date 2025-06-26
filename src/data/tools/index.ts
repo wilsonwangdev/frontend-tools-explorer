@@ -42,9 +42,13 @@ import { playwright } from "./playwright";
 import { cypress } from "./cypress";
 import { webdriverio } from "./webdriverio";
 import { parcel } from "./parcel";
+import { angular } from "./angular";
+import { docusaurus } from "./docusaurus";
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  docusaurus,
+  angular,
   rolldown,
   oxc,
   rspack,
