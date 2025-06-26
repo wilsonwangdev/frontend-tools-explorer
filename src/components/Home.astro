@@ -10,7 +10,7 @@ import { BRAND_NAME } from '../constants/brand';
 const categories = ['All', ...new Set(tools.map(tool => tool.category))];
 ---
 
-<div id="app" class="container mx-auto px-4 py-8 font-inter">
+<div id="app" class="container mx-auto px-4 py-8 font-inter dark:text-gray-100">
     <div id="loadingState" class="block transition-opacity duration-700 ease-in-out">
         <LoadingState />
     </div>
@@ -60,11 +60,11 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
                 type="text"
                 id="searchInput"
                 placeholder="Search tools..."
-                class="w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400 transition-colors duration-200"
+                class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-colors duration-200"
                 aria-label="Search for tools"
                 autocomplete="off"
             />
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
@@ -73,19 +73,19 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         <div class="relative w-full sm:w-64 group">
             <select 
                 id="categoryFilter" 
-                class="appearance-none w-full bg-white border border-gray-300 rounded-xl py-3 pl-12 pr-10 text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-gray-400 transition-colors duration-200 font-medium"
+                class="appearance-none w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-10 text-gray-700 dark:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-colors duration-200 font-medium"
                 aria-label="Filter tools by category"
             >
                 {categories.map(category => (
-                    <option value={category} class="py-2 font-medium">{category}</option>
+                    <option value={category} class="py-2 font-medium dark:bg-gray-800">{category}</option>
                 ))}
             </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 group-hover:text-gray-700 transition-colors duration-200">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 dark:text-gray-400 transition-colors duration-200">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </div>
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 group-hover:text-gray-700 transition-colors duration-200">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400 transition-colors duration-200">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
@@ -96,18 +96,18 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
     <div class="-mx-4 sm:mx-0">
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full align-middle">
-                <div class="overflow-hidden border border-gray-200 sm:rounded-lg shadow-sm bg-white">
+                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg shadow-sm bg-white dark:bg-gray-800">
                     <table class="min-w-full divide-y divide-gray-200" role="grid" aria-label="Frontend tools list">
-                        <thead class="bg-gray-100">
+                        <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">Description</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Category</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Links</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Icon</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell">Description</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell">Category</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Links</th>
                             </tr>
                         </thead>
-                        <tbody id="toolsTableBody" class="bg-white divide-y divide-gray-200 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50">
+                        <tbody id="toolsTableBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50 dark:[&>tr:nth-child(even)]:bg-gray-700/50">
                             {/* TODO: Optimize rendering with pagination or lazy loading on scroll for better performance */}
                             {tools.map(tool => (
                                 <ToolCard 
@@ -229,7 +229,7 @@ const categories = ['All', ...new Set(tools.map(tool => tool.category))];
         toolRows.forEach(row => {
             const categoryCell = row.querySelector('td:nth-child(4)');
             if (categoryCell) {
-                categoryCell.classList.add('cursor-pointer', 'hover:bg-gray-50', 'transition-colors', 'duration-150');
+                categoryCell.classList.add('cursor-pointer', 'transition-colors', 'duration-150');
                 categoryCell.addEventListener('click', () => {
                     const category = categoryCell.textContent?.trim() || '';
                     if (categoryFilter) {
