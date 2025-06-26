@@ -1,0 +1,24 @@
+# Vercel deployment ignore file
+
+# Ignore development files
+.git
+.github
+.vscode
+
+# Ignore configuration files that aren't needed for build
+.editorconfig
+.eslintignore
+.eslintrc
+.prettierignore
+.prettierrc
+
+# Ignore documentation
+*.md
+!README.md
+
+# Ignore test files
+**/*.test.*
+**/*.spec.*
+
+# Don't ignore node_modules/sharp
+!node_modules/sharp

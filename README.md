@@ -105,6 +105,18 @@ To add a new frontend tool to the directory:
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 
+## 🔄 Continuous Integration
+
+This project uses GitHub Actions for continuous integration to ensure code quality. The CI workflow automatically runs linting and formatting checks on every pull request and push to the main branch.
+
+For more details on the CI setup, troubleshooting common issues, and best practices, see [CI.md](./CI.md).
+
+## 🖼️ Image Processing
+
+This project uses Astro's built-in image optimization with Sharp for processing images. Sharp is required for both local development and Vercel deployment.
+
+For more details on image processing configuration, troubleshooting, and best practices, see [IMAGE-PROCESSING.md](./IMAGE-PROCESSING.md).
+
 ## 📝 License
 
 Distributed under the MIT License. See `LICENSE` for more information.

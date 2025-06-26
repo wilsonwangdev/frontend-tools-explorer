@@ -22,5 +22,9 @@ export default defineConfig({
     prefetchAll: true
   },
 
-  adapter: vercel()
+  // Configure Vercel adapter with image service enabled
+  adapter: vercel({
+    imageService: true,
+    devImageService: 'sharp'
+  })
 });

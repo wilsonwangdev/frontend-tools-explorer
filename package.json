@@ -17,8 +17,7 @@
     "check": "biome check . --write",
     "prepare": "husky",
     "lint-staged": "lint-staged",
-    "preinstall": "node -e \"process.env.npm_config_user_agent && !process.env.npm_config_user_agent.includes('pnpm') && (console.error('Please use pnpm instead of npm or yarn'), process.exit(1))\"",
-    "install-pnpm-fallback": "npm install -g pnpm@8.15.4"
+    "preinstall": "node -e \"process.env.npm_config_user_agent && !process.env.npm_config_user_agent.includes('pnpm') && (console.error('Please use pnpm instead of npm or yarn'), process.exit(1))\""
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.0",
