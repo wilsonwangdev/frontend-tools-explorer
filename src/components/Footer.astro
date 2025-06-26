@@ -4,12 +4,10 @@ const packageJson = await import('../../package.json');
 const version = packageJson.default.version;
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
-const { 
-    className = "mt-12 pb-6 text-center text-sm"
-} = Astro.props;
+const { className = 'mt-12 pb-6 text-center text-sm' } = Astro.props;
 ---
 
 <footer class={className} style="color: var(--color-text-secondary);">

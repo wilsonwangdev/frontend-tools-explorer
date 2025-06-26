@@ -1,10 +1,10 @@
-import type { Tool } from "../types";
+import type { Tool } from '../types';
 
 export const esbuild: Tool = {
-  icon: "local",
-  name: "Esbuild",
-  description: "A fast bundler and minifier for JavaScript and TypeScript",
-  category: "Build Tool",
-  docsLink: "https://esbuild.github.io/",
-  githubLink: "https://github.com/evanw/esbuild",
+  icon: 'local',
+  name: 'Esbuild',
+  description: 'A fast bundler and minifier for JavaScript and TypeScript',
+  category: 'Build Tool',
+  docsLink: 'https://esbuild.github.io/',
+  githubLink: 'https://github.com/evanw/esbuild',
 };

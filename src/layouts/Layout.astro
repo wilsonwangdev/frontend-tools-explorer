@@ -1,15 +1,18 @@
 ---
-import { BRAND_NAME } from '../constants/brand';
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
+import { BRAND_NAME } from '../constants/brand';
 import '../styles/global.css';
 
 interface Props {
-	title?: string;
-	description?: string;
+  title?: string;
+  description?: string;
 }
 
-const { title = BRAND_NAME, description = 'A curated collection of frontend tools and resources.' } = Astro.props;
+const {
+  title = BRAND_NAME,
+  description = 'A curated collection of frontend tools and resources.',
+} = Astro.props;
 ---
 
 <!doctype html>

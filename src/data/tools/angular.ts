@@ -1,10 +1,10 @@
-import type { Tool } from "../types";
+import type { Tool } from '../types';
 
 export const angular: Tool = {
-  icon: "local",
-  name: "Angular",
-  description: "A complete framework for building web applications",
-  category: "Frontend Framework",
-  docsLink: "https://angular.io",
-  githubLink: "https://github.com/angular/angular",
+  icon: 'local',
+  name: 'Angular',
+  description: 'A complete framework for building web applications',
+  category: 'Frontend Framework',
+  docsLink: 'https://angular.io',
+  githubLink: 'https://github.com/angular/angular',
 };

@@ -43,10 +43,7 @@ export const toolName: Tool = {
   description: 'Brief description of the tool and its purpose',
   category: 'UI Library',                 // Must match one of the categories in types.ts
   docsLink: 'https://tool-docs-url.com',  // Link to official documentation
-  githubLink: 'https://github.com/org/repo', // Link to GitHub repository
-  maintainer: 'Organization Name',        // Who maintains this tool
-  language: 'JavaScript',                 // Primary language
-  features: ['Feature 1', 'Feature 2']    // Key features of the tool
+  githubLink: 'https://github.com/org/repo' // Link to GitHub repository
 };
 ```
 

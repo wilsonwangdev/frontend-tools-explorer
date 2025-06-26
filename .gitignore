@@ -46,3 +46,7 @@ coverage/
 # Cache
 .cache/
 .vercel/
+
+# Linting and formatting caches
+.biome/
+.oxc/

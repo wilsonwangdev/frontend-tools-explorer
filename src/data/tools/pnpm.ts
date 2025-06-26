@@ -1,10 +1,10 @@
-import type { Tool } from "../types";
+import type { Tool } from '../types';
 
 export const pnpm: Tool = {
-  name: "pnpm",
-  description: "Fast, disk space efficient package manager",
-  icon: "https://pnpm.io/img/pnpm-no-name-with-frame.svg",
-  category: "Package Manager",
-  docsLink: "https://pnpm.io",
-  githubLink: "https://github.com/pnpm/pnpm",
+  name: 'pnpm',
+  description: 'Fast, disk space efficient package manager',
+  icon: 'https://pnpm.io/img/pnpm-no-name-with-frame.svg',
+  category: 'Package Manager',
+  docsLink: 'https://pnpm.io',
+  githubLink: 'https://github.com/pnpm/pnpm',
 };

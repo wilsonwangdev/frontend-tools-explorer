@@ -1,11 +1,11 @@
-import type { Tool } from "../types";
+import type { Tool } from '../types';
 
 export const npm: Tool = {
-  icon: "https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg?v=1",
-  name: "npm",
+  icon: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg?v=1',
+  name: 'npm',
   description:
-    "Default package manager for Node.js with the largest software registry in the world",
-  category: "Package Manager",
-  docsLink: "https://www.npmjs.com",
-  githubLink: "https://github.com/npm/cli",
+    'Default package manager for Node.js with the largest software registry in the world',
+  category: 'Package Manager',
+  docsLink: 'https://www.npmjs.com',
+  githubLink: 'https://github.com/npm/cli',
 };

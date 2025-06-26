@@ -2,8 +2,7 @@
   "recommendations": [
     "astro-build.astro-vscode",
     "bradlc.vscode-tailwindcss",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "biomejs.biome",
     "streetsidesoftware.code-spell-checker",
     "ms-vscode.vscode-typescript-next"
   ],

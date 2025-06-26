@@ -8,7 +8,9 @@ const { icon, name, description, category, docsLink, githubLink } = Astro.props;
 const imagePath = `/src/assets/icons/${name.toLowerCase()}.svg` as const;
 const defaultImagePath = '/src/assets/icons/default.svg' as const;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*.svg', { eager: true });
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*.svg', {
+  eager: true,
+});
 ---
 
 <tr 

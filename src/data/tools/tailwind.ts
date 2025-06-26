@@ -1,10 +1,10 @@
-import type { Tool } from "../types";
+import type { Tool } from '../types';
 
 export const tailwind: Tool = {
-  icon: "https://avatars.githubusercontent.com/u/67109815?s=48&v=4",
-  name: "Tailwind CSS",
-  description: "A utility-first CSS framework for rapid UI development",
-  category: "CSS Framework",
-  docsLink: "https://tailwindcss.com/",
-  githubLink: "https://github.com/tailwindlabs/tailwindcss",
+  icon: 'https://avatars.githubusercontent.com/u/67109815?s=48&v=4',
+  name: 'Tailwind CSS',
+  description: 'A utility-first CSS framework for rapid UI development',
+  category: 'CSS Framework',
+  docsLink: 'https://tailwindcss.com/',
+  githubLink: 'https://github.com/tailwindlabs/tailwindcss',
 };
