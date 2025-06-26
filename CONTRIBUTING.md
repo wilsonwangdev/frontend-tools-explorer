@@ -62,6 +62,24 @@ export const toolName: Tool = {
 
 ## Development Setup
 
+### Prerequisites
+
+- Node.js (v20.3.0 or newer)
+- pnpm (v8.0.0 or newer)
+
+> **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js 20+) to manage pnpm:
+> ```sh
+> # Enable Corepack
+> corepack enable
+> 
+> # Activate pnpm
+> corepack prepare pnpm@latest --activate
+> ```
+>
+> For more details on our package manager and Node.js requirements, see [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md).
+
+### Setup Steps
+
 1. Clone the repository
    ```sh
    git clone https://github.com/wilsonwangdev/frontend-tools-explorer.git
@@ -70,20 +88,21 @@ export const toolName: Tool = {
 
 2. Install dependencies
    ```sh
-   npm install
-   # or
+   # Using Corepack (recommended)
+   corepack enable
+   corepack prepare pnpm@latest --activate
    pnpm install
-   # or
-   yarn install
+   
+   # Alternative: If you have network issues with Corepack
+   npm install -g pnpm@8.15.4
+   pnpm install
    ```
+   
+   > If you encounter network issues with Corepack during git operations, see the [Troubleshooting section in PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md#troubleshooting).
 
 3. Start the development server
    ```sh
-   npm run dev
-   # or
    pnpm dev
-   # or
-   yarn dev
    ```
 
 4. Open your browser and visit `http://localhost:4321`

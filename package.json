@@ -2,6 +2,11 @@
   "name": "frontend-tools-explorer",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20.3.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.4",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -11,7 +16,9 @@
     "format": "biome format . --write",
     "check": "biome check . --write",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "preinstall": "node -e \"process.env.npm_config_user_agent && !process.env.npm_config_user_agent.includes('pnpm') && (console.error('Please use pnpm instead of npm or yarn'), process.exit(1))\"",
+    "install-pnpm-fallback": "npm install -g pnpm@8.15.4"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.2.0",
@@ -24,6 +31,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "postcss": "^8.5.6",
+    "semver": "^7.5.4",
     "tailwindcss": "^3.4.17"
   }
 }

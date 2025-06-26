@@ -45,8 +45,10 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
 
 ### Prerequisites
 
-- Node.js (v18 or newer)
-- npm, pnpm, or Yarn
+- Node.js (v20.3.0 or newer)
+- pnpm (v8.0.0 or newer)
+
+> **Note:** This project requires specific Node.js and package manager versions. For more details, see [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md).
 
 ### Installation
 
@@ -60,21 +62,22 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
 2. Install dependencies
 
    ```sh
-   npm install
-   # or
+   # Using Corepack (recommended)
+   corepack enable
+   corepack prepare pnpm@latest --activate
    pnpm install
-   # or
-   yarn install
+   
+   # Alternative: If you have network issues with Corepack
+   npm install -g pnpm@8.15.4
+   pnpm install
    ```
+
+   > **Note:** This project requires pnpm as the package manager. We recommend using Corepack (built into Node.js 20+) to manage pnpm. See [PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md) for more details and troubleshooting.
 
 3. Start the development server
 
    ```sh
-   npm run dev
-   # or
    pnpm dev
-   # or
-   yarn dev
    ```
 
 4. Open your browser and visit `http://localhost:4321`
