@@ -46,10 +46,41 @@ const { title = BRAND_NAME } = Astro.props;
 				opacity: 0;
 			}
 
-			/* Optimized theme transitions for better performance */
+			/* Light theme colors */
 			:root {
-				--theme-transition-duration: 150ms;
-				--theme-transition-timing: ease-out;
+				/* Theme transition settings */
+				--theme-transition-duration: 200ms;
+				--theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+				
+				/* Light theme colors */
+				--color-text: #1f2937;
+				--color-text-rgb: 31, 41, 55;
+				--color-text-secondary: #6b7280;
+				--color-text-secondary-rgb: 107, 114, 128;
+				--color-background: #f9fafb;
+				--color-background-secondary: #ffffff;
+				--color-border: #e5e7eb;
+				--color-primary: #4f46e5;
+				--color-primary-rgb: 79, 70, 229; /* RGB values for primary color */
+				--color-primary-hover: #4338ca;
+				--color-accent: #7c3aed;
+				--color-accent-rgb: 124, 58, 237; /* RGB values for accent color */
+			}
+
+			/* Dark theme colors */
+			:root.dark {
+				--color-text: #f9fafb;
+				--color-text-rgb: 249, 250, 251;
+				--color-text-secondary: #9ca3af;
+				--color-text-secondary-rgb: 156, 163, 175;
+				--color-background: #111827;
+				--color-background-secondary: #1f2937;
+				--color-border: #374151;
+				--color-primary: #6366f1;
+				--color-primary-rgb: 99, 102, 241; /* RGB values for primary color */
+				--color-primary-hover: #4f46e5;
+				--color-accent: #8b5cf6;
+				--color-accent-rgb: 139, 92, 246; /* RGB values for accent color */
 			}
 
 			/* Prevent transitions during initial page load */
@@ -57,14 +88,14 @@ const { title = BRAND_NAME } = Astro.props;
 				transition: none !important;
 			}
 
-			/* Only apply transitions during theme changes */
+			/* Apply transitions during theme changes */
 			.theme-transitioning * {
-				transition: color var(--theme-transition-duration) var(--theme-transition-timing),
-							background-color var(--theme-transition-duration) var(--theme-transition-timing),
-							border-color var(--theme-transition-duration) var(--theme-transition-timing);
+				transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+				transition-timing-function: var(--theme-transition-timing);
+				transition-duration: var(--theme-transition-duration);
 			}
 
-			/* Optimize performance by only transitioning specific elements */
+			/* Apply will-change to optimize performance */
 			.theme-transitioning body,
 			.theme-transitioning header,
 			.theme-transitioning footer,
@@ -93,14 +124,14 @@ const { title = BRAND_NAME } = Astro.props;
 			}
 		</style>
 	</head>
-	<body class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
+	<body class="min-h-screen" style="color: var(--color-text); background-color: var(--color-background);">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">
 			Skip to content
 		</a>
 		<div class="astro-loading-indicator" aria-hidden="true"></div>
-		<header class="sticky top-0 z-10 bg-white dark:bg-gray-800 shadow-sm py-2 px-4">
+		<header class="sticky top-0 z-10 shadow-sm py-2 px-4" style="background-color: var(--color-background-secondary);">
 			<div class="container mx-auto flex justify-between items-center">
-				<div class="text-xl font-bold text-gray-800 dark:text-white">{BRAND_NAME}</div>
+				<div class="text-xl font-bold" style="color: var(--color-text);">{BRAND_NAME}</div>
 				<ThemeToggle />
 			</div>
 		</header>

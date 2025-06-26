@@ -12,16 +12,24 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*
 ---
 
 <tr 
-  class="hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:shadow-sm" 
+  class="hover:shadow-sm" 
+  style="
+    --hover-bg: rgba(59, 130, 246, 0.1);
+  "
   transition:animate="fade"
   tabindex="0"
   role="row"
   aria-label={`${name}: ${description}`}
+  onmouseover="this.style.backgroundColor = 'var(--hover-bg)'" 
+  onmouseout="this.style.backgroundColor = 'transparent'"
 >
-  <td class="px-4 sm:px-6 py-4 whitespace-nowrap border-r border-gray-100 dark:border-gray-700">
+  <td class="px-4 sm:px-6 py-4 whitespace-nowrap border-r" style="border-color: var(--color-border);">
     <div 
-      class="w-10 h-10 flex items-center justify-center overflow-visible bg-white dark:bg-gray-700 rounded-md shadow-sm hover:scale-125" 
-      style="transition: transform 0.3s ease;" 
+      class="w-10 h-10 flex items-center justify-center overflow-visible rounded-md shadow-sm hover:scale-125" 
+      style="
+        transition: transform 0.3s ease;
+        background-color: var(--color-background-secondary);
+      " 
       transition:name={`tool-icon-${name}`}
       aria-hidden="true"
     >
@@ -57,13 +65,20 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*
     </div>
   </td>
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-    <div class="text-sm font-medium text-gray-900 dark:text-white" transition:name={`tool-name-${name}`}>{name}</div>
+    <div class="text-sm font-medium" style="color: var(--color-text);" transition:name={`tool-name-${name}`}>{name}</div>
   </td>
   <td class="px-4 sm:px-6 py-4 whitespace-normal hidden md:table-cell h-[72px]">
-    <div class="text-sm text-gray-500 dark:text-gray-300 line-clamp-2">{description}</div>
+    <div class="text-sm line-clamp-2" style="color: var(--color-text-secondary);">{description}</div>
   </td>
   <td class="px-4 sm:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
-    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 hover:bg-blue-100 dark:hover:bg-blue-900/50" transition:name={`tool-category-${category}`}>
+    <span 
+      class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full" 
+      style="
+        background-color: rgba(var(--color-primary-rgb), 0.1);
+        color: var(--color-primary);
+      "
+      transition:name={`tool-category-${category}`}
+    >
       {category}
     </span>
   </td>
@@ -73,7 +88,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*
         href={docsLink}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-800/50 text-sm gap-1 w-full sm:w-auto justify-center"
+        class="group inline-flex items-center px-3 py-1 rounded-full text-sm gap-1 w-full sm:w-auto justify-center transition-colors duration-200"
+        style="
+          background-color: rgba(var(--color-primary-rgb), 0.1);
+          color: var(--color-primary);
+        "
+        onmouseover="this.style.backgroundColor = 'rgba(var(--color-primary-rgb), 0.2)';"
+        onmouseout="this.style.backgroundColor = 'rgba(var(--color-primary-rgb), 0.1)';"
         aria-label={`${name} documentation`}
         data-astro-prefetch="hover"
       >
@@ -88,7 +109,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*
         href={githubLink}
         target="_blank"
         rel="noopener noreferrer"
-        class="group inline-flex items-center px-3 py-1 rounded-full bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 text-sm gap-1 w-full sm:w-auto justify-center"
+        class="group inline-flex items-center px-3 py-1 rounded-full text-sm gap-1 w-full sm:w-auto justify-center transition-colors duration-200"
+        style="
+          background-color: rgba(var(--color-text-rgb, 31, 41, 55), 0.1);
+          color: var(--color-text-secondary);
+        "
+        onmouseover="this.style.backgroundColor = 'rgba(var(--color-text-rgb, 31, 41, 55), 0.2)';"
+        onmouseout="this.style.backgroundColor = 'rgba(var(--color-text-rgb, 31, 41, 55), 0.1)';"
         aria-label={`${name} GitHub repository`}
         data-astro-prefetch="hover"
       >
