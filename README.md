@@ -111,6 +111,10 @@ This project uses GitHub Actions for continuous integration to ensure code quali
 
 For more details on the CI setup, troubleshooting common issues, and best practices, see [CI.md](./CI.md).
 
+### Dependency Management
+
+This project uses pnpm for dependency management and requires proper lockfile handling, especially in CI environments. For guidance on managing the lockfile and resolving common issues, see [LOCKFILE-MANAGEMENT.md](./LOCKFILE-MANAGEMENT.md).
+
 ## 🖼️ Image Processing
 
 This project uses Astro's built-in image optimization with Sharp for processing images. Sharp is required for both local development and Vercel deployment.

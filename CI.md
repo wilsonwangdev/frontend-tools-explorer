@@ -52,10 +52,13 @@ If you encounter dependency-related issues in CI:
 3. Commit the updated lockfile
 4. Push the changes to trigger a new CI run
 
+For more detailed guidance on lockfile management and troubleshooting, see [LOCKFILE-MANAGEMENT.md](./LOCKFILE-MANAGEMENT.md).
+
 ## Best Practices
 
 1. Always commit the `pnpm-lock.yaml` file to ensure consistent dependencies
 2. Use the same Node.js and pnpm versions locally as specified in the CI workflow
 3. Avoid manually editing the lockfile
 4. When adding new dependencies, update the lockfile by running `pnpm install` and commit the changes
-5. If you're experiencing CI failures related to the lockfile, try removing the `--frozen-lockfile` flag in your local environment
+5. Use `pnpm install --no-frozen-lockfile` in CI environments to prevent lockfile-related failures
+6. If you're experiencing CI failures related to the lockfile, try removing the `--frozen-lockfile` flag in your local environment
