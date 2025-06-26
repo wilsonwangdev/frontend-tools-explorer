@@ -36,7 +36,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Check formatting
-        run: biome format --write=false .
+        run: pnpm biome format .
 
       - name: Run linting
-        run: biome check .
+        run: pnpm biome check .

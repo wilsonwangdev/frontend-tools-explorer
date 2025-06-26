@@ -29,7 +29,14 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["src/**/*.js", "src/**/*.ts", "src/**/*.jsx", "src/**/*.tsx", "src/**/*.astro"]
+    "includes": [
+      "src/**/*.js",
+      "src/**/*.ts",
+      "src/**/*.jsx",
+      "src/**/*.tsx",
+      "src/**/*.astro",
+      "*.json"
+    ]
   },
   "overrides": [
     {

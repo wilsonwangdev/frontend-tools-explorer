@@ -24,6 +24,10 @@ pnpm format
 
 # Run both linting and formatting with auto-fixes
 pnpm check
+
+# Direct usage
+biome check .
+biome format --write .
 ```
 
 
@@ -82,11 +86,17 @@ This project uses **Biome** as the linting and formatting tool because:
 
 ## Installation
 
-To use Biome, install it globally or as a dev dependency:
+Biome is already installed as a dev dependency in this project. You can use it directly through the npm scripts or via the `biome` command:
 
 ```bash
-# Install Biome
-npm install --save-dev @biomejs/biome
+# Using npm scripts
+pnpm lint
+pnpm format
+pnpm check
+
+# Or directly
+pnpm biome check .
+pnpm biome format .
 ```
 
 ## Editor Integration

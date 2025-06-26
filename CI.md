@@ -12,8 +12,8 @@ The CI workflow is defined in `.github/workflows/lint.yml` and performs the foll
 2. **Setup pnpm**: Installs the pnpm package manager (version 8.15.4)
 3. **Setup Node.js**: Configures Node.js environment (version 22.17.0 LTS) with pnpm caching
 4. **Install Dependencies**: Installs project dependencies using pnpm
-5. **Check Formatting**: Verifies code formatting using Biome
-6. **Run Linting**: Performs code linting using Biome
+5. **Check Formatting**: Verifies code formatting using Biome with `pnpm biome format .`
+6. **Run Linting**: Performs code linting using Biome with `pnpm biome check .`
 
 ## Important Notes on Dependency Management
 
