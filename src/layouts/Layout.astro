@@ -11,7 +11,7 @@ const { title = BRAND_NAME } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="A comprehensive collection of modern frontend development tools and frameworks. Enhance your development workflow with a curated selection of tools, libraries, and resources." />
@@ -45,6 +45,46 @@ const { title = BRAND_NAME } = Astro.props;
 				transform: scaleX(1);
 				opacity: 0;
 			}
+
+			/* Optimized theme transitions for better performance */
+			:root {
+				--theme-transition-duration: 150ms;
+				--theme-transition-timing: ease-out;
+			}
+
+			/* Prevent transitions during initial page load */
+			.no-transitions * {
+				transition: none !important;
+			}
+
+			/* Only apply transitions during theme changes */
+			.theme-transitioning * {
+				transition: color var(--theme-transition-duration) var(--theme-transition-timing),
+							background-color var(--theme-transition-duration) var(--theme-transition-timing),
+							border-color var(--theme-transition-duration) var(--theme-transition-timing);
+			}
+
+			/* Optimize performance by only transitioning specific elements */
+			.theme-transitioning body,
+			.theme-transitioning header,
+			.theme-transitioning footer,
+			.theme-transitioning main,
+			.theme-transitioning a,
+			.theme-transitioning button,
+			.theme-transitioning tr,
+			.theme-transitioning td,
+			.theme-transitioning th,
+			.theme-transitioning div,
+			.theme-transitioning span,
+			.theme-transitioning p,
+			.theme-transitioning h1,
+			.theme-transitioning h2,
+			.theme-transitioning h3,
+			.theme-transitioning h4,
+			.theme-transitioning h5,
+			.theme-transitioning h6 {
+				will-change: color, background-color, border-color;
+			}
 			
 			/* Improve focus styles for accessibility */
 			:focus-visible {
@@ -53,7 +93,7 @@ const { title = BRAND_NAME } = Astro.props;
 			}
 		</style>
 	</head>
-	<body class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+	<body class="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">
 			Skip to content
 		</a>
