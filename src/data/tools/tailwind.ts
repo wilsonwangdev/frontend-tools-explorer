@@ -7,7 +7,4 @@ export const tailwind: Tool = {
   category: "CSS Framework",
   docsLink: "https://tailwindcss.com/",
   githubLink: "https://github.com/tailwindlabs/tailwindcss",
-  maintainer: "Tailwind Labs",
-  language: "CSS",
-  features: ["Utility-first", "Responsive Design", "Customization"],
 };

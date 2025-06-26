@@ -26,9 +26,4 @@ export interface Tool {
   category: ToolCategory;
   docsLink: string;
   githubLink: string;
-  version?: string;
-  language?: string;
-  maintainer?: string;
-  features?: string[];
-  stars?: number;
 }

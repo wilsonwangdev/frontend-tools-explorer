@@ -7,6 +7,4 @@ export const nx: Tool = {
   category: "Monorepo Tool",
   docsLink: "https://nx.dev",
   githubLink: "https://github.com/nrwl/nx",
-  maintainer: "Nrwl",
-  language: "TypeScript",
 };

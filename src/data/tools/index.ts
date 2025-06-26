@@ -44,9 +44,21 @@ import { webdriverio } from "./webdriverio";
 import { parcel } from "./parcel";
 import { angular } from "./angular";
 import { docusaurus } from "./docusaurus";
+import { farm } from "./farm";
+import { electron } from "./electron";
+import { tarui } from "./tarui";
+import { lightningcss } from "./lightningcss";
+import { rstest } from "./rstest";
+import { rspress } from "./rspress";
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  lightningcss,
+  rspress,
+  rstest,
+  tarui,
+  electron,
+  farm,
   docusaurus,
   angular,
   rolldown,

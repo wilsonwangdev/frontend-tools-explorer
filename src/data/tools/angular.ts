@@ -7,6 +7,4 @@ export const angular: Tool = {
   category: "Frontend Framework",
   docsLink: "https://angular.io",
   githubLink: "https://github.com/angular/angular",
-  maintainer: "Google",
-  language: "TypeScript",
 };

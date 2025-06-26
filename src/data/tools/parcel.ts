@@ -7,6 +7,4 @@ export const parcel: Tool = {
   category: "Build Tool",
   docsLink: "https://parceljs.org",
   githubLink: "https://github.com/parcel-bundler/parcel",
-  maintainer: "Parcel Bundler Team",
-  language: "JavaScript",
 };

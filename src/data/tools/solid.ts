@@ -7,7 +7,4 @@ export const solid: Tool = {
   category: "Framework",
   docsLink: "https://solidjs.com",
   githubLink: "https://github.com/solidjs/solid",
-  maintainer: "SolidJS Authors",
-  language: "TypeScript",
-  features: ["Fast", "Lightweight", "Expressive", "TypeScript Support"],
 };

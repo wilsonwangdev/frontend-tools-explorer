@@ -8,7 +8,4 @@ export const docusaurus: Tool = {
   category: "Framework",
   docsLink: "https://docusaurus.io",
   githubLink: "https://github.com/facebook/docusaurus",
-  maintainer: "Docusaurus Authors",
-  language: "TypeScript",
-  features: ["Fast", "Lightweight", "Expressive", "TypeScript Support"],
 };

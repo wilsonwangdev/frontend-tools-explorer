@@ -7,7 +7,4 @@ export const turbo: Tool = {
   category: "Monorepo Tool",
   docsLink: "https://turbo.build",
   githubLink: "https://github.com/vercel/turbo",
-  maintainer: "Vercel",
-  language: "TypeScript",
-  features: ["Fast", "Opinionated", "TypeScript Support", "JavaScript Support", "JSON Support"],
 };

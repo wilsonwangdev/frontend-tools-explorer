@@ -7,12 +7,4 @@ export const obuild: Tool = {
   category: "Build Tool",
   docsLink: "https://github.com/unjs/obuild",
   githubLink: "https://github.com/unjs/obuild",
-  maintainer: "Evan You",
-  language: "TypeScript",
-  features: [
-    "Fast Bundling",
-    "Minification",
-    "Tree Shaking",
-    "TypeScript Support",
-  ],
 };
