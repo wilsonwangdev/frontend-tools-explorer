@@ -5,21 +5,18 @@
 <button
   id="theme-toggle"
   type="button"
-  class="group rounded-lg p-2.5 inline-flex items-center transition-colors duration-200"
-  style="color: var(--color-text-secondary); background-color: transparent;"
-  onmouseover="this.style.color = 'var(--color-primary)';"
-  onmouseout="this.style.color = 'var(--color-text-secondary)';"
+  class="group rounded-lg p-2.5 inline-flex items-center justify-center transition-all duration-300 hover:bg-opacity-10 hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+  style="color: var(--color-text-secondary); background-color: transparent; width: 40px; height: 40px; position: relative; transform-style: preserve-3d; transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1); contain: layout paint; will-change: transform; transform: translateZ(0); isolation: isolate;"
   aria-label="Toggle dark mode"
 >
-  <!-- Sun icon for dark mode (show when in dark mode) -->
-  <span class="inline-flex transition-transform duration-300 group-hover:scale-125">
+  <!-- Light mode (sun) icon wrapper - optimized with CSS custom properties -->
+  <div id="light-icon-wrapper" class="light-icon-wrapper absolute inset-0 flex items-center justify-center" style="--icon-opacity: 0; --icon-rotate: 90deg; --icon-scale: 0.5; --icon-z: 1; opacity: var(--icon-opacity); transform: rotate3d(0, 1, 0, var(--icon-rotate)) scale(var(--icon-scale)) translateZ(0); z-index: var(--icon-z); transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); contain: strict; transform-origin: center center; will-change: transform, opacity;">
     <svg
       id="theme-toggle-light-icon"
-      class="w-5 h-5"
+      class="w-5 h-5 transition-transform duration-250" style="transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
-      style="display: none;"
     >
     <path
       d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
@@ -27,47 +24,89 @@
       clip-rule="evenodd"
     ></path>
     </svg>
-  </span>
+  </div>
   
-  <!-- Moon icon for light mode (show when in light mode) -->
-  <span class="inline-flex transition-transform duration-300 group-hover:scale-125">
+  <!-- Dark mode (moon) icon wrapper - optimized with CSS custom properties -->
+  <div id="dark-icon-wrapper" class="dark-icon-wrapper absolute inset-0 flex items-center justify-center" style="--icon-opacity: 1; --icon-rotate: 0deg; --icon-scale: 1; --icon-z: 2; opacity: var(--icon-opacity); transform: rotate3d(0, 1, 0, var(--icon-rotate)) scale(var(--icon-scale)) translateZ(0); z-index: var(--icon-z); transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.25s cubic-bezier(0.22, 0.61, 0.36, 1); contain: strict; transform-origin: center center; will-change: transform, opacity;">
     <svg
       id="theme-toggle-dark-icon"
-      class="w-5 h-5"
+      class="w-5 h-5 transition-transform duration-250" style="transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);"
       fill="currentColor"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
-      style="display: block;"
     >
       <path
         d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
       ></path>
     </svg>
-  </span>
+  </div>
 </button>
 
 <script>
-  // Get theme toggle icons
+  // Cache DOM elements to avoid repeated queries
   const lightIcon = document.getElementById('theme-toggle-light-icon');
   const darkIcon = document.getElementById('theme-toggle-dark-icon');
+  const lightIconWrapper = document.getElementById('light-icon-wrapper');
+  const darkIconWrapper = document.getElementById('dark-icon-wrapper');
+  const htmlElement = document.documentElement;
   
-  // Function to update icon visibility based on theme
-  function updateIcons(isDark: boolean): void {
-    if (!lightIcon || !darkIcon) return;
+  // Optimized icon animation using CSS custom properties
+  function updateIcons(isDark: boolean) {
+    if (!lightIconWrapper || !darkIconWrapper) return;
     
-    if (isDark) {
-      lightIcon.style.display = 'block';
-      darkIcon.style.display = 'none';
-    } else {
-      lightIcon.style.display = 'none';
-      darkIcon.style.display = 'block';
-    }
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+      // Prepare all style changes before applying them
+      if (isDark) {
+        // Update CSS custom properties for light icon (show)
+        lightIconWrapper.style.setProperty('--icon-opacity', '1');
+        lightIconWrapper.style.setProperty('--icon-rotate', '0deg');
+        lightIconWrapper.style.setProperty('--icon-scale', '1');
+        lightIconWrapper.style.setProperty('--icon-z', '2');
+        
+        // Update CSS custom properties for dark icon (hide)
+        darkIconWrapper.style.setProperty('--icon-opacity', '0');
+        darkIconWrapper.style.setProperty('--icon-rotate', '-90deg');
+        darkIconWrapper.style.setProperty('--icon-scale', '0.5');
+        darkIconWrapper.style.setProperty('--icon-z', '1');
+      } else {
+        // Update CSS custom properties for light icon (hide)
+        lightIconWrapper.style.setProperty('--icon-opacity', '0');
+        lightIconWrapper.style.setProperty('--icon-rotate', '90deg');
+        lightIconWrapper.style.setProperty('--icon-scale', '0.5');
+        lightIconWrapper.style.setProperty('--icon-z', '1');
+        
+        // Update CSS custom properties for dark icon (show)
+        darkIconWrapper.style.setProperty('--icon-opacity', '1');
+        darkIconWrapper.style.setProperty('--icon-rotate', '0deg');
+        darkIconWrapper.style.setProperty('--icon-scale', '1');
+        darkIconWrapper.style.setProperty('--icon-z', '2');
+      }
+    });
   }
 
-  // Function to set the theme based on user preference or system preference
+  // Function to set theme and update icons with optimized performance
   function setTheme() {
     // Add a class to prevent transitions during initial page load
-    document.documentElement.classList.add('no-transitions');
+    const docElement = document.documentElement;
+    docElement.classList.add('no-transitions');
+    
+    // Initialize icon wrappers with CSS custom properties for better performance
+    // Use a single rAF call to batch all style operations
+    if (lightIconWrapper && darkIconWrapper) {
+      requestAnimationFrame(() => {
+        // Set initial positions using CSS custom properties
+        lightIconWrapper.style.setProperty('--icon-opacity', '0');
+        lightIconWrapper.style.setProperty('--icon-rotate', '90deg');
+        lightIconWrapper.style.setProperty('--icon-scale', '0.5');
+        lightIconWrapper.style.setProperty('--icon-z', '1');
+        
+        darkIconWrapper.style.setProperty('--icon-opacity', '0');
+        darkIconWrapper.style.setProperty('--icon-rotate', '-90deg');
+        darkIconWrapper.style.setProperty('--icon-scale', '0.5');
+        darkIconWrapper.style.setProperty('--icon-z', '1');
+      });
+    }
     
     // Check for saved theme preference or use the system preference
     const savedTheme = localStorage.getItem('theme');
@@ -77,15 +116,15 @@
     
     // If theme is explicitly saved, use that
     if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
+      docElement.classList.add('dark');
       isDark = true;
     } else if (savedTheme === 'light') {
-      document.documentElement.classList.remove('dark');
+      docElement.classList.remove('dark');
       isDark = false;
     } else {
       // If no saved preference, use system preference
       if (systemPrefersDark) {
-        document.documentElement.classList.add('dark');
+        docElement.classList.add('dark');
         isDark = true;
       }
     }
@@ -95,58 +134,166 @@
     
     // Remove the no-transitions class after a short delay to allow the page to render
     setTimeout(() => {
-      document.documentElement.classList.remove('no-transitions');
-    }, 100);
+      // First remove the no-transitions class
+      docElement.classList.remove('no-transitions');
+      
+      // Use requestAnimationFrame to batch DOM operations and ensure they happen after the next paint
+      requestAnimationFrame(() => {
+        // Prepare the body for theme transition
+        document.body.style.willChange = 'background-color';
+        
+        // Add a subtle entrance animation for the visible icon using CSS custom properties
+        // The transition is already defined in the inline style of the icon wrappers
+        if (isDark && lightIconWrapper) {
+          // Show light icon
+          lightIconWrapper.style.setProperty('--icon-opacity', '1');
+          lightIconWrapper.style.setProperty('--icon-rotate', '0deg');
+          lightIconWrapper.style.setProperty('--icon-scale', '1');
+          lightIconWrapper.style.setProperty('--icon-z', '2');
+        } else if (!isDark && darkIconWrapper) {
+          // Show dark icon
+          darkIconWrapper.style.setProperty('--icon-opacity', '1');
+          darkIconWrapper.style.setProperty('--icon-rotate', '0deg');
+          darkIconWrapper.style.setProperty('--icon-scale', '1');
+          darkIconWrapper.style.setProperty('--icon-z', '2');
+        }
+        
+        // Reset will-change after animation completes
+        setTimeout(() => {
+          document.body.style.willChange = 'auto';
+        }, 250);
+      });
+    }, 50); // Reduced delay for better perceived performance
   }
 
   // Set theme on initial load
   setTheme();
 
-  // Toggle theme when button is clicked
+  // Function to prevent layout shifts by measuring and setting heights
+  function preserveLayoutHeights(): void {
+    // Select key elements that might cause layout shifts
+    const keyElements = document.querySelectorAll('.flex, .grid, .container, .relative, input, select');
+    
+    // Measure and set heights before transition
+    keyElements.forEach((el: Element) => {
+      const height = (el as HTMLElement).offsetHeight;
+      if (height > 0) {
+        (el as HTMLElement).style.setProperty('--height', `${height}px`);
+        (el as HTMLElement).style.setProperty('--min-height', `${height}px`);
+      }
+    });
+  }
+
+  // Function to reset height variables after transition
+  function resetLayoutHeights(): void {
+    const keyElements = document.querySelectorAll('.flex, .grid, .container, .relative, input, select');
+    keyElements.forEach((el: Element) => {
+      (el as HTMLElement).style.removeProperty('--height');
+      (el as HTMLElement).style.removeProperty('--min-height');
+    });
+  }
+
+  // Add click event listener to toggle theme with optimized performance
   document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    // Add transitioning class to enable animations
-    document.documentElement.classList.add('theme-transitioning');
+    // Prevent multiple clicks during animation
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle && themeToggle.getAttribute('data-animating') === 'true') return;
     
-    const isDark = document.documentElement.classList.contains('dark');
+    // Set animating state
+    if (themeToggle) themeToggle.setAttribute('data-animating', 'true');
     
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      updateIcons(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      updateIcons(true);
-    }
+    // First read phase - cache all DOM values before making any changes
+    const docElement = document.documentElement;
+    const isDark = docElement.classList.contains('dark');
     
-    // Remove transitioning class after animation completes
-    setTimeout(() => {
-      document.documentElement.classList.remove('theme-transitioning');
-    }, 200); // Match the transition duration in CSS variables
+    // Preserve layout heights before transition
+    preserveLayoutHeights();
+    
+    // Use requestAnimationFrame to batch DOM operations
+    requestAnimationFrame(() => {
+      // First write phase - prepare for animation
+      // Apply minimal will-change hints - only to body for theme color
+      document.body.style.willChange = 'background-color';
+      
+      // Add transitioning class to enable smooth transitions
+      docElement.classList.add('theme-transitioning');
+      
+      // Update icons immediately for smooth animation
+      updateIcons(!isDark);
+      
+      // Use another rAF to ensure DOM updates are batched and happen after the next paint
+      requestAnimationFrame(() => {
+        // Second write phase - apply theme change
+        if (isDark) {
+          docElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          docElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        
+        // Remove transitioning class and will-change hints after animation completes
+        setTimeout(() => {
+          // Final write phase - cleanup
+          docElement.classList.remove('theme-transitioning');
+          if (themeToggle) themeToggle.setAttribute('data-animating', 'false');
+          document.body.style.willChange = 'auto';
+          
+          // Reset layout heights after transition
+          resetLayoutHeights();
+        }, 250); // Reduced transition duration to match CSS variables
+      });
+    });
   });
 
-  // Listen for system preference changes
+  // Listen for system preference changes with optimized performance
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     // Only update if user hasn't set a preference
     if (!localStorage.getItem('theme')) {
-      // Add transitioning class to enable animations
-      document.documentElement.classList.add('theme-transitioning');
+      // Prevent multiple animations
+      const themeToggle = document.getElementById('theme-toggle');
+      if (themeToggle && themeToggle.getAttribute('data-animating') === 'true') return;
+      if (themeToggle) themeToggle.setAttribute('data-animating', 'true');
       
+      // First read phase - cache all DOM values before making any changes
+      const docElement = document.documentElement;
       const isDark = e.matches;
       
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      // Preserve layout heights before transition
+      preserveLayoutHeights();
       
-      // Update icons based on theme
-      updateIcons(isDark);
+      // Use requestAnimationFrame to batch DOM operations
+      requestAnimationFrame(() => {
+        // First write phase - prepare for animation
+        // Apply minimal will-change hints - only to body for theme color
+        document.body.style.willChange = 'background-color';
       
-      // Remove transitioning class after animation completes
-      setTimeout(() => {
-        document.documentElement.classList.remove('theme-transitioning');
-      }, 200); // Match the transition duration in CSS variables
+        // Add transitioning class to enable animations
+        docElement.classList.add('theme-transitioning');
+        
+        // Start icon animation immediately for smooth animation
+        updateIcons(isDark);
+        
+        // Use another rAF to ensure DOM updates are batched and happen after the next paint
+        requestAnimationFrame(() => {
+          // Second write phase - apply theme change
+          if (isDark) {
+            docElement.classList.add('dark');
+          } else {
+            docElement.classList.remove('dark');
+          }
+          
+          // Remove transitioning class after animation completes
+          setTimeout(() => {
+            docElement.classList.remove('theme-transitioning');
+            if (themeToggle) themeToggle.setAttribute('data-animating', 'false');
+            document.body.style.willChange = 'auto';
+            
+            // Reset layout heights after transition
+            resetLayoutHeights();
+          }, 250); // Reduced transition duration to match CSS variables
+        });
+      });
     }
   });
 </script>

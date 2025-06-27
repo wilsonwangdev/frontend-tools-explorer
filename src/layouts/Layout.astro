@@ -53,9 +53,9 @@ const {
 
 			/* Light theme colors */
 			:root {
-				/* Theme transition settings */
-				--theme-transition-duration: 200ms;
-				--theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+				/* Theme transition settings - optimized for performance */
+				--theme-transition-duration: 250ms;
+				--theme-transition-timing: cubic-bezier(0.22, 0.61, 0.36, 1);
 				
 				/* Light theme colors */
 				--color-text: #1f2937;
@@ -93,35 +93,68 @@ const {
 				transition: none !important;
 			}
 
-			/* Apply transitions during theme changes */
-			.theme-transitioning * {
-				transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-				transition-timing-function: var(--theme-transition-timing);
-				transition-duration: var(--theme-transition-duration);
+			/* Apply transitions during theme changes - optimized for performance */
+			/* Use CSS variables to control which properties transition */
+			:root {
+				--theme-bg-transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
+				--theme-color-transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+				--theme-border-transition: border-color var(--theme-transition-duration) var(--theme-transition-timing);
+				--theme-transform-transition: transform var(--theme-transition-duration) var(--theme-transition-timing);
 			}
 
-			/* Apply will-change to optimize performance */
+			/* Apply transitions only to the highest level containers to minimize DOM reflow */
 			.theme-transitioning body,
-			.theme-transitioning header,
-			.theme-transitioning footer,
 			.theme-transitioning main,
-			.theme-transitioning a,
-			.theme-transitioning button,
-			.theme-transitioning tr,
-			.theme-transitioning td,
-			.theme-transitioning th,
-			.theme-transitioning div,
-			.theme-transitioning span,
-			.theme-transitioning p,
-			.theme-transitioning h1,
-			.theme-transitioning h2,
-			.theme-transitioning h3,
-			.theme-transitioning h4,
-			.theme-transitioning h5,
-			.theme-transitioning h6 {
-				will-change: color, background-color, border-color;
+			.theme-transitioning header,
+			.theme-transitioning footer {
+				transition: var(--theme-bg-transition), var(--theme-color-transition);
+				backface-visibility: hidden; /* Reduce flickering */
+				contain: paint layout; /* Isolate paint operations and prevent layout shifts */
+				min-height: 100%; /* Maintain consistent height */
+				box-sizing: border-box; /* Ensure padding doesn't affect height */
 			}
 			
+			/* Apply more specific transitions only to interactive elements */
+			.theme-transitioning button,
+			.theme-transitioning a,
+			.theme-transitioning input,
+			.theme-transitioning select {
+				transition: var(--theme-color-transition), var(--theme-border-transition);
+				contain: layout style; /* Isolate layout and style changes */
+			}
+
+			/* Handle SVG elements separately for better performance */
+			.theme-transitioning svg {
+				transition: var(--theme-transform-transition);
+				contain: strict; /* Strict containment for SVGs */
+			}
+
+			.theme-transitioning svg * {
+				transition: fill 0.3s var(--theme-transition-timing), stroke 0.3s var(--theme-transition-timing);
+			}
+
+			/* Minimize will-change usage to only critical elements */
+			/* Using will-change on too many elements can cause performance issues */
+			.theme-transitioning body {
+				will-change: background-color;
+			}
+			
+			/* Only apply will-change to the theme toggle button which has the most complex animations */
+			.theme-transitioning #theme-toggle {
+				will-change: transform;
+				isolation: isolate; /* Create a new stacking context */
+			}
+			
+			/* Prevent layout shifts during theme transitions */
+			.theme-transitioning .flex,
+			.theme-transitioning .grid,
+			.theme-transitioning .container,
+			.theme-transitioning .relative {
+				contain: layout style;
+				height: var(--height, auto);
+				min-height: var(--min-height, auto);
+			}
+
 			/* Improve focus styles for accessibility */
 			:focus-visible {
 				outline: 2px solid #4f46e5;
