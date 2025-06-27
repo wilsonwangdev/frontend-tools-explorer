@@ -194,7 +194,7 @@ const {
 				
 				// Use Font Face Observer pattern
 				const fontLoadPromises = [
-					new Promise(resolve => {
+					new Promise<void>(resolve => {
 						// Check if Inter font is loaded
 						if (document.fonts) {
 							document.fonts.ready.then(() => {
