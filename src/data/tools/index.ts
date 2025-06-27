@@ -28,7 +28,6 @@ import { pnpm } from './pnpm';
 import { preact } from './preact';
 import { qwik } from './qwik';
 import { react } from './react';
-// Import individual tool configurations
 import { rolldown } from './rolldown';
 import { rollup } from './rollup';
 import { rsbuild } from './rsbuild';

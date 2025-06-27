@@ -5,7 +5,7 @@ import type { Tool } from '../data';
 type Props = Pick<Tool, 'icon' | 'name' | 'description' | 'category' | 'docsLink' | 'githubLink'>;
 
 const { icon, name, description, category, docsLink, githubLink } = Astro.props;
-const imagePath = `/src/assets/icons/${name.toLowerCase()}.svg` as const;
+const imagePath = `/src/assets/icons/${name.replaceAll(' ', '').toLowerCase()}.svg` as const;
 const defaultImagePath = '/src/assets/icons/default.svg' as const;
 
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/icons/*.svg', {
