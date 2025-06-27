@@ -61,7 +61,7 @@ const categories = ['All', ...new Set(tools.map((tool) => tool.category))];
                 type="text"
                 id="searchInput"
                 placeholder="Search tools..."
-                class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 h-12 box-border"
+                class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 h-12 box-border text-base leading-normal"
                 aria-label="Search for tools"
                 autocomplete="off"
             />
@@ -74,11 +74,11 @@ const categories = ['All', ...new Set(tools.map((tool) => tool.category))];
         <div class="relative w-full sm:w-64 group">
             <select 
                 id="categoryFilter" 
-                class="appearance-none w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-10 text-gray-700 dark:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 font-medium h-12 box-border"
+                class="appearance-none w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-10 text-gray-700 dark:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 font-medium h-12 box-border text-base leading-normal"
                 aria-label="Filter tools by category"
             >
                 {categories.map(category => (
-                    <option value={category} class="py-2 font-medium dark:bg-gray-800">{category}</option>
+                    <option value={category} class="py-2 font-medium dark:bg-gray-800 text-base leading-normal">{category}</option>
                 ))}
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 dark:text-gray-400 transition-all duration-250">
@@ -101,11 +101,11 @@ const categories = ['All', ...new Set(tools.map((tool) => tool.category))];
                     <table class="min-w-full divide-y divide-gray-200" role="grid" aria-label="Frontend tools list">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Icon</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell">Description</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell">Category</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Links</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Icon</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Name</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell text-base leading-normal">Description</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell text-base leading-normal">Category</th>
+                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Links</th>
                             </tr>
                         </thead>
                         <tbody id="toolsTableBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50 dark:[&>tr:nth-child(even)]:bg-gray-700/50">
@@ -404,16 +404,16 @@ const categories = ['All', ...new Set(tools.map((tool) => tool.category))];
 </script>
 
 <style is:global>
-    /* Import Inter font for UI */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    /* Import Rubik for headings */
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
-
-    .font-inter {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    /* Font classes moved to src/styles/fonts.css */
+    /* Additional component-specific styles can be added here */
+    
+    /* Apply consistent sizing to elements */
+    .table th {
+        @apply text-base leading-normal;
     }
-
-    .font-rubik {
-        font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+    
+    /* Ensure consistent sizing for important text elements */
+    .tool-name {
+        @apply text-base leading-normal;
     }
 </style>

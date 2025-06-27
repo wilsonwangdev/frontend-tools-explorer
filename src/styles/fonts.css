@@ -1,0 +1,30 @@
+/* Font management for the application */
+
+/* Font loading strategy */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:?!@#$%^&*()_+-=[]{}|<>/~`\'"&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:?!@#$%^&*()_+-=[]{}|<>/~`\'"&display=swap');
+
+/* Font classes */
+.font-inter {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-display: swap;
+}
+
+.font-rubik {
+  font-family: 'Rubik', system-ui, -apple-system, sans-serif;
+  font-display: swap;
+}
+
+/* Font loading state classes */
+.fonts-loading {
+  /* Prevent layout shifts during font loading */
+  font-size: calc(1rem);
+  letter-spacing: normal;
+}
+
+.fonts-loaded {
+  /* Apply final font styling once fonts are loaded */
+  font-size: calc(1rem);
+  letter-spacing: normal;
+  transition: letter-spacing 0.1s ease-out;
+}

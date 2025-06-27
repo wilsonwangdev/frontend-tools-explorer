@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import { BRAND_NAME } from '../constants/brand';
 import '../styles/global.css';
+import '../styles/fonts.css';
 
 interface Props {
   title?: string;
@@ -186,11 +187,59 @@ const {
 				});
 			});
 			
+			// Font loading detection
+			const detectFontLoading = () => {
+				// Add fonts-loading class to document during loading
+				document.documentElement.classList.add('fonts-loading');
+				
+				// Use Font Face Observer pattern
+				const fontLoadPromises = [
+					new Promise(resolve => {
+						// Check if Inter font is loaded
+						if (document.fonts) {
+							document.fonts.ready.then(() => {
+								// Mark fonts as loaded
+								document.documentElement.classList.remove('fonts-loading');
+								document.documentElement.classList.add('fonts-loaded');
+								resolve();
+							});
+						} else {
+							// Fallback for browsers without document.fonts
+							setTimeout(() => {
+								document.documentElement.classList.remove('fonts-loading');
+								document.documentElement.classList.add('fonts-loaded');
+								resolve();
+							}, 300);
+						}
+					})
+				];
+				
+				// When all fonts are loaded
+				Promise.all(fontLoadPromises).then(() => {
+					console.log('All fonts loaded successfully');
+				}).catch(err => {
+					console.warn('Font loading issue:', err);
+					// Still mark as loaded to prevent UI being stuck
+					document.documentElement.classList.remove('fonts-loading');
+					document.documentElement.classList.add('fonts-loaded');
+				});
+			};
+			
+			// Initialize font loading detection
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', detectFontLoading);
+			} else {
+				detectFontLoading();
+			}
+			
 			document.addEventListener('astro:page-load', () => {
 				// Reset loading state immediately
 				requestAnimationFrame(() => {
 					document.documentElement.classList.remove('astro-loading', 'astro-loading-done');
 				});
+				
+				// Re-detect fonts on page navigation
+				detectFontLoading();
 				
 				// Announce page changes to screen readers
 				const pageTitle = document.title;
