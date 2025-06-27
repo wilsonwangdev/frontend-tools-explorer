@@ -19,7 +19,24 @@ export default defineConfig({
   },
 
   prefetch: {
-    prefetchAll: true
+    prefetchAll: true,
+    defaultStrategy: 'viewport'
+  },
+
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      cssMinify: true,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      }
+    },
+    optimizeDeps: {
+      include: ['tailwindcss']
+    }
   },
 
   // Configure Vercel adapter with image service enabled

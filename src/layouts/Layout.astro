@@ -26,7 +26,7 @@ const {
 		<title>{title}</title>
 		<ClientRouter fallback="swap" />
 		<style is:global>
-			/* Add loading indicator for view transitions */
+			/* Add loading indicator for view transitions - optimized for performance */
 			.astro-loading-indicator {
 				position: fixed;
 				top: 0;
@@ -38,7 +38,8 @@ const {
 				transform-origin: 0% 0%;
 				z-index: 9999;
 				opacity: 0;
-				transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+				transition: transform 0.2s ease-out, opacity 0.15s ease-out;
+				will-change: transform, opacity;
 			}
 			
 			:root.astro-loading .astro-loading-indicator {
@@ -53,9 +54,9 @@ const {
 
 			/* Light theme colors */
 			:root {
-				/* Theme transition settings - optimized for performance */
-				--theme-transition-duration: 250ms;
-				--theme-transition-timing: cubic-bezier(0.22, 0.61, 0.36, 1);
+				/* Theme transition settings - optimized for faster performance */
+				--theme-transition-duration: 150ms;
+				--theme-transition-timing: cubic-bezier(0.25, 0.1, 0.25, 1);
 				
 				/* Light theme colors */
 				--color-text: #1f2937;
@@ -172,20 +173,24 @@ const {
 			<slot />
 		</main>
 		<script>
-			// Handle loading indicator
+			// Handle loading indicator with optimized timing
 			document.addEventListener('astro:before-preparation', () => {
-				document.documentElement.classList.add('astro-loading');
+				requestAnimationFrame(() => {
+					document.documentElement.classList.add('astro-loading');
+				});
 			});
 			
 			document.addEventListener('astro:after-preparation', () => {
-				document.documentElement.classList.add('astro-loading-done');
+				requestAnimationFrame(() => {
+					document.documentElement.classList.add('astro-loading-done');
+				});
 			});
 			
 			document.addEventListener('astro:page-load', () => {
-				// Reset loading state
-				setTimeout(() => {
+				// Reset loading state immediately
+				requestAnimationFrame(() => {
 					document.documentElement.classList.remove('astro-loading', 'astro-loading-done');
-				}, 300);
+				});
 				
 				// Announce page changes to screen readers
 				const pageTitle = document.title;
@@ -198,21 +203,17 @@ const {
 					document.body.appendChild(announcer);
 				}
 				announcer.textContent = `Navigated to ${pageTitle}`;
-				
+
 				// Ensure content is visible
 				const loadingState = document.getElementById('loadingState');
 				const mainContent = document.getElementById('mainContent');
-				
 				if (loadingState && mainContent) {
-					// Force content to be visible after page load
-					setTimeout(() => {
-						loadingState.style.display = 'none';
-						mainContent.style.display = 'block';
-						mainContent.classList.remove('hidden');
-						mainContent.classList.add('opacity-100');
-						mainContent.classList.add('translate-y-0');
-						mainContent.classList.remove('translate-y-4');
-					}, 500);
+					loadingState.style.display = 'none';
+					mainContent.style.display = 'block';
+					mainContent.classList.remove('hidden');
+					mainContent.classList.add('content-visible');
+					mainContent.classList.add('opacity-100');
+					mainContent.style.transform = 'translateY(0) scale(1)';
 				}
 			});
 		</script>

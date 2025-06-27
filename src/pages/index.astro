@@ -9,21 +9,26 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-	// Ensure content is visible after a short delay
-	document.addEventListener('DOMContentLoaded', () => {
-		setTimeout(() => {
-			const loadingState = document.getElementById('loadingState');
-			const mainContent = document.getElementById('mainContent');
-			
-			if (loadingState && mainContent) {
-				console.log('Forcing content visibility from index.astro');
-				loadingState.style.display = 'none';
-				mainContent.style.display = 'block';
-				mainContent.classList.remove('hidden');
-				mainContent.classList.add('opacity-100');
-				mainContent.classList.add('translate-y-0');
-				mainContent.classList.remove('translate-y-4');
-			}
-		}, 1000);
-	});
+	// Ensure content is visible immediately after DOM is ready
+	const showContent = () => {
+		const loadingState = document.getElementById('loadingState');
+		const mainContent = document.getElementById('mainContent');
+		
+		if (loadingState && mainContent) {
+			console.log('Forcing content visibility from index.astro');
+			loadingState.style.display = 'none';
+			mainContent.style.display = 'block';
+			mainContent.classList.remove('hidden');
+			mainContent.classList.add('content-visible');
+			mainContent.classList.add('opacity-100');
+			mainContent.style.transform = 'translateY(0) scale(1)';
+		}
+	};
+
+	// Execute immediately if DOM is already loaded
+	if (document.readyState === 'interactive' || document.readyState === 'complete') {
+		showContent();
+	} else {
+		document.addEventListener('DOMContentLoaded', showContent);
+	}
 </script>
