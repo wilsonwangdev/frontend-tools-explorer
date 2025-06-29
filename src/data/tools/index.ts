@@ -11,9 +11,11 @@ import { electron } from './electron';
 import { esbuild } from './esbuild';
 import { eslint } from './eslint';
 import { farm } from './farm';
+import { flutter } from './flutter';
 import { jest } from './jest';
 import { lightningcss } from './lightningcss';
 import { lit } from './lit';
+import { lynx } from './lynx';
 import { mocha } from './mocha';
 import { nextjs } from './nextjs';
 import { nodejs } from './nodejs';
@@ -28,6 +30,7 @@ import { pnpm } from './pnpm';
 import { preact } from './preact';
 import { qwik } from './qwik';
 import { react } from './react';
+import { reactnative } from './reactnative';
 import { rolldown } from './rolldown';
 import { rollup } from './rollup';
 import { rsbuild } from './rsbuild';
@@ -42,6 +45,7 @@ import { swc } from './swc';
 import { tailwind } from './tailwind';
 import { tarui } from './tarui';
 import { turbo } from './turbo';
+import { unocss } from './unocss';
 import { vite } from './vite';
 import { vitepress } from './vitepress';
 import { vitest } from './vitest';
@@ -51,6 +55,10 @@ import { yarn } from './yarn';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  lynx,
+  flutter,
+  reactnative,
+  unocss,
   lightningcss,
   rspress,
   rstest,
