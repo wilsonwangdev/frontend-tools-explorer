@@ -1,4 +1,3 @@
 # TODOs
 
-- pagination
-- search
+- [] pagination

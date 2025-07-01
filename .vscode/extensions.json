@@ -4,7 +4,8 @@
     "bradlc.vscode-tailwindcss",
     "biomejs.biome",
     "streetsidesoftware.code-spell-checker",
-    "ms-vscode.vscode-typescript-next"
+    "ms-vscode.vscode-typescript-next",
+    "davidanson.vscode-markdownlint"
   ],
   "unwantedRecommendations": []
 }

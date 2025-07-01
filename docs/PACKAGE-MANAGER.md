@@ -70,7 +70,6 @@ corepack enable
 corepack prepare pnpm@latest --activate
 ```
 
-
 This approach has several advantages:
 
 1. No need to install pnpm globally
@@ -85,7 +84,6 @@ If you prefer not to use Corepack, you can install pnpm globally:
 ```bash
 npm install -g pnpm
 ```
-
 
 ## Troubleshooting
 
@@ -107,7 +105,6 @@ If you encounter network errors when Corepack tries to download pnpm (especially
 Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-8.15.4.tgz.
 Internal Error: Error when performing the request...
 ```
-
 
 Try these solutions:
 

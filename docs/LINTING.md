@@ -30,8 +30,6 @@ biome check .
 biome format --write .
 ```
 
-
-
 ## Features Summary
 
 | Feature | Biome | markdownlint-cli2 |

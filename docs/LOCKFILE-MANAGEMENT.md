@@ -93,11 +93,11 @@ This project now uses Node.js v22 LTS (codename 'Jod'), which provides several b
 
 ### For CI Environments
 
-1. **Use `--no-frozen-lockfile` in CI**:
+1. **Use `--frozen-lockfile` in CI**:
    ```yaml
    # In GitHub Actions workflow
    - name: Install dependencies
-     run: pnpm install --no-frozen-lockfile
+     run: pnpm install --frozen-lockfile
    ```
 
 2. **Ensure complete repository history**:
@@ -167,8 +167,8 @@ If you encounter `ERR_PNPM_UNSUPPORTED_ENGINE` errors:
    - If using other Node.js installation methods, download and install the LTS version from [nodejs.org](https://nodejs.org/)
 
 3. **Update project configuration** (if necessary):
-   - Update `.nvmrc` to specify the LTS Node.js version (currently 22.17.0)
-   - Update `engines` field in `package.json` to require Node.js >=22.0.0
+   - Update `.nvmrc` to specify the LTS Node.js version (currently 20.19.3)
+   - Update `engines` field in `package.json` to require Node.js >=20.19.3
    - Consider adding a note in your README about using the LTS version
 
 4. **Reinstall dependencies with the correct Node.js version**:
@@ -179,6 +179,6 @@ If you encounter `ERR_PNPM_UNSUPPORTED_ENGINE` errors:
 
 ## Additional Resources
 
-- [pnpm Documentation on Lockfile](https://pnpm.io/lockfile)
+- [pnpm Documentation on Lockfile](https://pnpm.io/git#lockfiles)
 - [CI Setup Documentation](./CI.md)
 - [Package Manager Documentation](./PACKAGE-MANAGER.md)

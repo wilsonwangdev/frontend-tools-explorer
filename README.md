@@ -1,5 +1,3 @@
-# Frontend Tools Explorer
-
 <div align="center">
 
 # Frontend Tools Explorer
@@ -160,10 +158,8 @@ Project Link: [https://github.com/wilsonwangdev/frontend-tools-explorer](https:/
 We're constantly working to improve Frontend Tools Explorer. Here are some features we're planning to add:
 
 - Pagination for better performance with large datasets
-- Enhanced search capabilities
 - Tool comparison feature
 - User reviews and ratings
-- Dark mode support
 
 See the [open issues](https://github.com/wilsonwangdev/frontend-tools-explorer/issues) for a full list of proposed features and known issues.
 

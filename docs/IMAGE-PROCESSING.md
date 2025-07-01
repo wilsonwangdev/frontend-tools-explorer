@@ -22,11 +22,11 @@ Our project uses Astro's built-in image optimization, configured in `astro.confi
 image: {
   // Enable built-in image optimization
   domains: [
-    'rspack.dev',
-    'static.npmjs.com',
-    'react.dev',
-    'vuejs.org',
-    'raw.githubusercontent.com'
+    'bun.sh',
+    'upload.wikimedia.org',
+    'avatars.githubusercontent.com',
+    'cdn.jsdelivr.net',
+    'pnpm.io',
   ]
 }
 ```
