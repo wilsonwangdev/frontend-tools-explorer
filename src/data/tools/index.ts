@@ -12,11 +12,13 @@ import { esbuild } from './esbuild';
 import { eslint } from './eslint';
 import { farm } from './farm';
 import { flutter } from './flutter';
+import { ionic } from './ionic';
 import { jest } from './jest';
 import { lightningcss } from './lightningcss';
 import { lit } from './lit';
 import { lynx } from './lynx';
 import { mocha } from './mocha';
+import { nativescript } from './nativescript';
 import { nextjs } from './nextjs';
 import { nodejs } from './nodejs';
 import { npm } from './npm';
@@ -55,6 +57,8 @@ import { yarn } from './yarn';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  ionic,
+  nativescript,
   lynx,
   flutter,
   reactnative,
