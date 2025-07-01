@@ -5,7 +5,7 @@ export const docusaurus: Tool = {
   name: 'Docusaurus',
   description:
     'A project for building, deploying, and maintaining open source project websites easily.',
-  category: 'Framework',
+  category: 'Static Site Generator',
   docsLink: 'https://docusaurus.io',
   githubLink: 'https://github.com/facebook/docusaurus',
 };

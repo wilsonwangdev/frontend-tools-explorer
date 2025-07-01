@@ -1,23 +1,26 @@
 // Tool Categories
 export type ToolCategory =
+  | 'Cross Platform Framework'
+  | 'CSS Build Tool'
+  | 'Web Components Library'
   | 'Runtime'
   | 'Package Manager'
   | 'Static Site Generator'
   | 'Testing Framework'
   | 'Frontend Framework'
   | 'Build Tool'
-  | 'Monorepo Tool'
+  | 'Compiling Tools'
+  | 'Monorepo Management Tool'
   | 'Library Development Tool'
   | 'Bundler'
-  | 'Framework'
+  | 'Web Framework'
+  | 'Full Stack Framework'
   | 'SSR Framework'
+  | 'Syntax Extension'
   | 'UI Library'
   | 'CSS Framework'
   | 'Component Library'
-  | 'Testing'
-  | 'Linter & Formatter'
-  | 'JavaScript Tools'
-  | 'Other';
+  | 'Linter & Formatter';
 
 export interface Tool {
   icon: 'local' | `https://${string}` | `http://${string}`;

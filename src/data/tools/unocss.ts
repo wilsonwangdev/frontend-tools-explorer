@@ -5,7 +5,7 @@ export const unocss: Tool = {
   name: 'Unocss',
   description:
     'Unocss is a utility-first CSS framework that can be used with any framework or library.',
-  category: 'Monorepo Tool',
+  category: 'CSS Framework',
   docsLink: 'https://unocss.dev',
   githubLink: 'https://github.com/unocss/unocss',
 };

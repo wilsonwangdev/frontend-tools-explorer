@@ -5,7 +5,7 @@ export const ionic: Tool = {
   name: 'Ionic',
   description:
     'A powerful cross-platform UI toolkit for building native-quality iOS, Android, and Progressive Web Apps with HTML, CSS, and JavaScript.',
-  category: 'Other',
+  category: 'Cross Platform Framework',
   docsLink: 'https://ionicframework.com/docs',
   githubLink: 'https://github.com/ionic-team/ionic-framework',
 };

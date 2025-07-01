@@ -2,9 +2,10 @@ import type { Tool } from '../types';
 
 export const yarn: Tool = {
   name: 'Yarn',
-  description: 'Fast, reliable, and secure dependency management',
+  description:
+    'An established open-source package manager used to manage dependencies in JavaScript projects',
   icon: 'local',
   category: 'Package Manager',
   docsLink: 'https://yarnpkg.com',
-  githubLink: 'https://github.com/yarnpkg/yarn',
+  githubLink: 'https://github.com/yarnpkg/berry',
 };

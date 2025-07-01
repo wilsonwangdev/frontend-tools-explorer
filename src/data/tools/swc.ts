@@ -3,8 +3,7 @@ import type { Tool } from '../types';
 export const swc: Tool = {
   icon: 'local',
   name: 'SWC',
-  description:
-    'SWC is a Rust-based platform for the Web. It is a super-fast alternative to Babel, with zero runtime cost.',
+  description: 'An extensible Rust-based platform for the next generation of fast developer tools',
   category: 'Bundler',
   docsLink: 'https://swc.rs',
   githubLink: 'https://github.com/swc-project/swc',

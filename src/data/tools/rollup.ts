@@ -4,7 +4,7 @@ export const rollup: Tool = {
   icon: 'local',
   name: 'Rollup',
   description: 'The JavaScript module bundler',
-  category: 'Framework',
+  category: 'Bundler',
   docsLink: 'https://rollupjs.org',
   githubLink: 'https://github.com/rollup/rollup',
 };

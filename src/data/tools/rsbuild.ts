@@ -4,7 +4,7 @@ export const rsbuild: Tool = {
   icon: 'local',
   name: 'Rsbuild',
   description:
-    'A Rspack-based build tool that provides out-of-box build capabilities with enhanced developer experience',
+    'An Rspack-based build tool that provides out-of-the-box setup for enjoyable development experience',
   category: 'Build Tool',
   docsLink: 'https://rsbuild.dev',
   githubLink: 'https://github.com/web-infra-dev/rsbuild',

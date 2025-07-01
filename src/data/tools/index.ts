@@ -12,11 +12,13 @@ import { esbuild } from './esbuild';
 import { eslint } from './eslint';
 import { farm } from './farm';
 import { flutter } from './flutter';
+import { fresh } from './fresh';
 import { ionic } from './ionic';
 import { jest } from './jest';
 import { lightningcss } from './lightningcss';
 import { lit } from './lit';
 import { lynx } from './lynx';
+import { mdx } from './mdx';
 import { mocha } from './mocha';
 import { nativescript } from './nativescript';
 import { nextjs } from './nextjs';
@@ -33,6 +35,7 @@ import { preact } from './preact';
 import { qwik } from './qwik';
 import { react } from './react';
 import { reactnative } from './reactnative';
+import { remix } from './remix';
 import { rolldown } from './rolldown';
 import { rollup } from './rollup';
 import { rsbuild } from './rsbuild';
@@ -57,7 +60,10 @@ import { yarn } from './yarn';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  remix,
+  fresh,
   ionic,
+  mdx,
   nativescript,
   lynx,
   flutter,
