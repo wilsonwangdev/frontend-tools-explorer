@@ -45,6 +45,7 @@ import { rspress } from './rspress';
 import { rstest } from './rstest';
 import { shadcn } from './shadcn';
 import { solid } from './solid';
+import { storybook } from './storybook';
 import { svelte } from './svelte';
 import { swc } from './swc';
 import { tailwind } from './tailwind';
@@ -56,10 +57,13 @@ import { vitepress } from './vitepress';
 import { vitest } from './vitest';
 import { vue } from './vue';
 import { webdriverio } from './webdriverio';
+import { webpack } from './webpack';
 import { yarn } from './yarn';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  storybook,
+  webpack,
   remix,
   fresh,
   ionic,

@@ -1,5 +1,6 @@
 // Tool Categories
 export type ToolCategory =
+  | 'Undefined'
   | 'Cross Platform Framework'
   | 'CSS Build Tool'
   | 'Web Components Library'
