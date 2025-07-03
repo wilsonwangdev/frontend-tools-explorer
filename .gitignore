@@ -50,3 +50,6 @@ coverage/
 # Linting and formatting caches
 .biome/
 .oxc/
+
+# local
+local/
