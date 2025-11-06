@@ -99,7 +99,7 @@ Markdown linting is integrated into our development workflow in two ways:
 
 Markdown linting complements our existing tooling:
 
-- **Biome**: Handles JavaScript, TypeScript, and Astro files
+- **Oxfmt**: Handles JavaScript, TypeScript, and Astro files
 - **markdownlint-cli2**: Handles Markdown documentation files
 - **Husky + lint-staged**: Runs appropriate linters based on file type
 

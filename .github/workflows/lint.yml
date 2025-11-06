@@ -12,37 +12,37 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['20.19.3', '22.17.0']  # Test with both Node.js v20 LTS and v22 LTS
+        node-version: ["20.19.3", "22.17.0"] # Test with both Node.js v20 LTS and v22 LTS
       fail-fast: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for proper lockfile validation
+          fetch-depth: 0 # Fetch all history for proper lockfile validation
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8.15.4  # Using the version from packageManager in package.json
+          version: 8.15.4 # Using the version from packageManager in package.json
           run_install: false
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting
-        run: pnpm biome format .
+        run: pnpm oxfmt
 
       - name: Run linting
-        run: pnpm biome check .
-        
+        run: pnpm oxfmt check .
+
       - name: Lint Markdown files
         run: pnpm lint:md
-        
+
       - name: Run all linting checks (combined)
         run: pnpm lint

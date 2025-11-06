@@ -1,5 +1,6 @@
 {
-  "*.{js,jsx,ts,tsx}": ["biome check --write", "biome format --write"],
-  "*.astro": ["biome check --write", "biome format --write"],
-  "*.md": ["markdownlint-cli2 --fix"]
+  "*.{js,jsx,ts,tsx}": [
+    "oxfmt check",
+    "oxfmt format"
+  ]
 }

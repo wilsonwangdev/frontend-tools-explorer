@@ -21,7 +21,7 @@ Frontend Tools Explorer is a curated collection of essential tools, libraries, a
 - Testing Frameworks (Vitest, Jest, Playwright, etc.)
 - Package Managers (npm, pnpm, Yarn, etc.)
 - Runtimes (Node.js, Deno, Bun, etc.)
-- Linters & Formatters (ESLint, Biome, etc.)
+- Linters & Formatters (ESLint, Oxfmt, etc.)
 - And many more!
 
 ### ✨ Features

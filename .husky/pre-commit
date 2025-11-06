@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Run lint-staged with available pnpm
 pnpm lint-staged || (
   echo "Error: Failed to run lint-staged. Make sure pnpm is installed."

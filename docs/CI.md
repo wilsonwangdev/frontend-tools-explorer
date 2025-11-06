@@ -12,8 +12,8 @@ The CI workflow is defined in `.github/workflows/lint.yml` and performs the foll
 2. **Setup pnpm**: Installs the pnpm package manager (version 8.15.4)
 3. **Setup Node.js**: Configures Node.js environment with both Node.js v20 LTS and v22 LTS using a matrix strategy
 4. **Install Dependencies**: Installs project dependencies using pnpm
-5. **Check Formatting**: Verifies code formatting using Biome with `pnpm biome format .`
-6. **Run JavaScript/TypeScript Linting**: Performs code linting using Biome with `pnpm biome check .`
+5. **Check Formatting**: Verifies code formatting using Oxfmt with `pnpm oxfmt`
+6. **Run JavaScript/TypeScript Linting**: Performs code linting using Oxfmt with `pnpm oxfmt check .`
 7. **Run Markdown Linting**: Checks markdown files with `pnpm lint:md`
 8. **Run Combined Linting**: Executes all linting checks with `pnpm lint`
 
@@ -88,7 +88,7 @@ If you prefer to test manually, follow these steps:
    pnpm install --no-frozen-lockfile
    
    # Check formatting
-   pnpm biome format .
+   pnpm oxfmt
    
    # Run JavaScript/TypeScript linting
    pnpm lint:js

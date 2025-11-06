@@ -22,7 +22,7 @@ chmod +x scripts/test-ci.sh
 
 - Runs all the individual commands from the CI workflow:
   - Installing dependencies
-  - Checking formatting with Biome
+  - Checking formatting with Oxfmt
   - Running JavaScript/TypeScript linting
   - Running Markdown linting
   - Running all linting checks at once

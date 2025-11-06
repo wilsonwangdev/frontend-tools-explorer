@@ -18,7 +18,7 @@ echo "1. Installing dependencies..."
 pnpm install --no-frozen-lockfile
 
 echo "\n2. Checking formatting..."
-pnpm biome format .
+pnpm oxfmt
 
 echo "\n3. Running JavaScript/TypeScript linting..."
 pnpm lint:js

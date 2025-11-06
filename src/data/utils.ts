@@ -12,6 +12,6 @@ export const searchTools = (query: string): Tool[] => {
     (tool: Tool) =>
       tool.name.toLowerCase().includes(lowercaseQuery) ||
       tool.description.toLowerCase().includes(lowercaseQuery) ||
-      tool.category.toLowerCase().includes(lowercaseQuery)
+      tool.category.toLowerCase().includes(lowercaseQuery),
   );
 };
