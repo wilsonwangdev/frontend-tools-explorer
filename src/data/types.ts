@@ -18,7 +18,6 @@ export type ToolCategory =
   | 'Full Stack Framework'
   | 'SSR Framework'
   | 'Syntax Extension'
-  | 'UI Library'
   | 'CSS Framework'
   | 'Component Library'
   | 'Linter & Formatter';

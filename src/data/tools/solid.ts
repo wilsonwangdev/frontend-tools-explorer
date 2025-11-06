@@ -5,7 +5,7 @@ export const solid: Tool = {
   name: 'Solid',
   description:
     'A declarative, efficient, and flexible JavaScript library for building user interfaces',
-  category: 'UI Library',
+  category: 'Frontend Framework',
   docsLink: 'https://solidjs.com',
   githubLink: 'https://github.com/solidjs/solid',
 };

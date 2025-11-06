@@ -61,9 +61,11 @@ import { webdriverio } from './webdriverio';
 import { webpack } from './webpack';
 import { yarn } from './yarn';
 import { tanstack } from './tanstack';
+import { rush } from './rush';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  rush,
   tanstack,
   moon,
   storybook,

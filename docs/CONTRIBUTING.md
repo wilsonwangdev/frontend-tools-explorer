@@ -41,7 +41,7 @@ export const toolName: Tool = {
   icon: 'https://path-to-tool-icon.svg',  // URL to the tool's icon
   name: 'Tool Name',                      // Display name of the tool
   description: 'Brief description of the tool and its purpose',
-  category: 'UI Library',                 // Must match one of the categories in types.ts
+  category: 'Frontend Framework',         // Must match one of the categories in types.ts
   docsLink: 'https://tool-docs-url.com',  // Link to official documentation
   githubLink: 'https://github.com/org/repo' // Link to GitHub repository
 };
@@ -73,7 +73,7 @@ export const toolName: Tool = {
 > ```sh
 > # Enable Corepack
 > corepack enable
-> 
+>
 > # Activate pnpm
 > corepack prepare pnpm@latest --activate
 > ```
@@ -94,16 +94,16 @@ export const toolName: Tool = {
    corepack enable
    corepack prepare pnpm@latest --activate
    pnpm install
-   
+
    # Alternative: If you have network issues with Corepack
    npm install -g pnpm@8.15.4
    pnpm install
-   
+
    # Note: Ensure you're using Node.js v22 LTS
    # Check your version with: node -v
    # If needed, install the LTS version from nodejs.org
    ```
-   
+
    > If you encounter network issues with Corepack during git operations, see the [Troubleshooting section in PACKAGE-MANAGER.md](./PACKAGE-MANAGER.md#troubleshooting).
 
 3. Start the development server
@@ -117,11 +117,11 @@ export const toolName: Tool = {
    ```sh
    # Run linting checks
    pnpm lint
-   
+
    # Test CI workflow locally
    ./scripts/test-ci.sh
    ```
-   
+
    > For more details on testing CI locally, see [CI.md](./CI.md#testing-ci-locally).
 
 ## Style Guidelines
