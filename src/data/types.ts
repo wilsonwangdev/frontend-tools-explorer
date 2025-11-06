@@ -16,7 +16,7 @@ export type ToolCategory =
   | 'Bundler'
   | 'Web Framework'
   | 'Full Stack Framework'
-  | 'SSR Framework'
+  | 'Meta Framework'
   | 'Syntax Extension'
   | 'CSS Framework'
   | 'Component Library'

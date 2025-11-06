@@ -5,7 +5,7 @@ export const tanstack: Tool = {
   name: 'TanStack Start',
   description:
     'Full-document SSR, Streaming, Server Functions, bundling and more, powered by TanStack Router and Vite - Ready to deploy to your favorite hosting provider.',
-  category: 'SSR Framework',
+  category: 'Full Stack Framework',
   docsLink: 'https://tanstack.com/start/latest',
   githubLink: 'https://github.com/tanstack',
 };
