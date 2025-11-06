@@ -20,6 +20,7 @@ import { lit } from './lit';
 import { lynx } from './lynx';
 import { mdx } from './mdx';
 import { mocha } from './mocha';
+import { moon } from './moon';
 import { nativescript } from './nativescript';
 import { nextjs } from './nextjs';
 import { nodejs } from './nodejs';
@@ -62,6 +63,7 @@ import { yarn } from './yarn';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  moon,
   storybook,
   webpack,
   remix,
