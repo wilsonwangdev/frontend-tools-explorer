@@ -64,9 +64,11 @@ import { tanstack } from './tanstack';
 import { rush } from './rush';
 import { prettier } from './prettier';
 import { reka } from './reka';
+import { jsr } from './jsr';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  jsr,
   reka,
   prettier,
   rush,
