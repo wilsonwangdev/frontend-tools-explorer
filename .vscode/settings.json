@@ -49,5 +49,8 @@
     "vitepress",
     "vitest",
     "webdriverio"
-  ]
+  ],
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }

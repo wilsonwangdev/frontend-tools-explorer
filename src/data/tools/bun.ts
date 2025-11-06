@@ -1,7 +1,7 @@
 import type { Tool } from '../types';
 
 export const bun: Tool = {
-  icon: 'https://bun.sh/logo.svg',
+  icon: 'local',
   name: 'Bun',
   description: 'All-in-one JavaScript runtime & toolkit designed for speed',
   category: 'Runtime',
