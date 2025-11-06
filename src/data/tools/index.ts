@@ -65,9 +65,11 @@ import { rush } from './rush';
 import { prettier } from './prettier';
 import { reka } from './reka';
 import { jsr } from './jsr';
+import { hono } from './hono';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  hono,
   jsr,
   reka,
   prettier,
