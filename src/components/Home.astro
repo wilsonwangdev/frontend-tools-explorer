@@ -10,409 +10,523 @@ const categories = ['All', ...new Set(tools.map((tool) => tool.category))];
 ---
 
 <div id="app" class="container mx-auto px-4 py-8 font-inter dark:text-gray-100">
-    <div id="loadingState" class="block transition-opacity duration-300 ease-in-out">
-        <LoadingState />
-    </div>
+  <div
+    id="loadingState"
+    class="block transition-opacity duration-300 ease-in-out"
+  >
+    <LoadingState />
+  </div>
 
-    <!-- Add a noscript fallback to ensure content is visible without JavaScript -->
-    <noscript>
-        <style>
-            #loadingState { display: none !important; }
-            #mainContent { 
-                display: block !important; 
-                opacity: 1 !important; 
-                position: relative !important;
-                visibility: visible !important;
-                transform: none !important;
-            }
-        </style>
-    </noscript>
-
-    <div id="mainContent" class="hidden opacity-0 transition-all duration-300 ease-in-out transform translate-y-4 scale-[0.99]">
+  <!-- Add a noscript fallback to ensure content is visible without JavaScript -->
+  <noscript>
     <style>
-        /* Ensure the content is fully rendered in memory but not visible */
-        #mainContent {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            visibility: hidden;
-            z-index: -1; /* Ensure it's behind the loading state */
-            will-change: opacity, transform; /* Optimize for animation */
-        }
-        
-        /* When content is ready to be shown */
-        #mainContent.content-visible {
-            position: relative;
-            visibility: visible;
-            z-index: 1; /* Bring it to the front when visible */
-            transform: translateY(0) scale(1) !important;
-        }
+      #loadingState {
+        display: none !important;
+      }
+      #mainContent {
+        display: block !important;
+        opacity: 1 !important;
+        position: relative !important;
+        visibility: visible !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+
+  <div
+    id="mainContent"
+    class="hidden opacity-0 transition-all duration-300 ease-in-out transform translate-y-4 scale-[0.99]"
+  >
+    <style>
+      /* Ensure the content is fully rendered in memory but not visible */
+      #mainContent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        visibility: hidden;
+        z-index: -1; /* Ensure it's behind the loading state */
+        will-change: opacity, transform; /* Optimize for animation */
+      }
+
+      /* When content is ready to be shown */
+      #mainContent.content-visible {
+        position: relative;
+        visibility: visible;
+        z-index: 1; /* Bring it to the front when visible */
+        transform: translateY(0) scale(1) !important;
+      }
     </style>
     <!-- Replace text-only brand name with the new TextLogo component -->
     <div class="mb-8">
-        <TextLogo />
+      <TextLogo />
     </div>
-    
-    <div class="mb-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start relative">
-        <div class="relative w-full sm:w-64 group">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search tools..."
-                class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 h-12 box-border text-base leading-normal"
-                aria-label="Search for tools"
-                autocomplete="off"
-            />
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400 transition-all duration-250">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </div>
+
+    <div
+      class="mb-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start relative"
+    >
+      <div class="relative w-full sm:w-64 group">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search tools..."
+          class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-4 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 h-12 box-border text-base leading-normal"
+          aria-label="Search for tools"
+          autocomplete="off"
+        />
+        <div
+          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400 transition-all duration-250"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
         </div>
-        <div class="relative w-full sm:w-64 group">
-            <select 
-                id="categoryFilter" 
-                class="appearance-none w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-10 text-gray-700 dark:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 font-medium h-12 box-border text-base leading-normal"
-                aria-label="Filter tools by category"
-            >
-                {categories.map(category => (
-                    <option value={category} class="py-2 font-medium dark:bg-gray-800 text-base leading-normal">{category}</option>
-                ))}
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 dark:text-gray-400 transition-all duration-250">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </div>
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400 transition-all duration-250">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </div>
+      </div>
+      <div class="relative w-full sm:w-80 md:w-[336px] group">
+        <select
+          id="categoryFilter"
+          class="appearance-none w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl py-3 pl-12 pr-10 text-gray-700 dark:text-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-250 font-medium h-12 box-border text-base leading-normal"
+          aria-label="Filter tools by category"
+        >
+          {
+            categories.map((category) => {
+              const count =
+                category === 'All'
+                  ? tools.length
+                  : tools.filter((tool) => tool.category === category).length;
+              return (
+                <option
+                  value={category}
+                  class="py-2 px-3 font-medium dark:bg-gray-800 text-base leading-normal whitespace-normal"
+                >
+                  {category} ({count})
+                </option>
+              );
+            })
+          }
+        </select>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500 dark:text-gray-400 transition-all duration-250"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
+          </svg>
         </div>
+        <div
+          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 dark:text-gray-400 transition-all duration-250"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </div>
+      </div>
     </div>
 
     <div class="-mx-4 sm:mx-0">
-        <div class="overflow-x-auto">
-            <div class="inline-block min-w-full align-middle">
-                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg shadow-sm bg-white dark:bg-gray-800">
-                    <table class="min-w-full divide-y divide-gray-200" role="grid" aria-label="Frontend tools list">
-                        <thead class="bg-gray-100 dark:bg-gray-700">
-                            <tr>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Icon</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Name</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell text-base leading-normal">Description</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell text-base leading-normal">Category</th>
-                                <th scope="col" class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal">Links</th>
-                            </tr>
-                        </thead>
-                        <tbody id="toolsTableBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50 dark:[&>tr:nth-child(even)]:bg-gray-700/50">
-                            {/* TODO: Optimize rendering with pagination or lazy loading on scroll for better performance */}
-                            {tools.map(tool => (
-                                <ToolCard 
-                                    icon={tool.icon}
-                                    name={tool.name}
-                                    description={tool.description}
-                                    category={tool.category}
-                                    docsLink={tool.docsLink}
-                                    githubLink={tool.githubLink}
-                                />
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+      <div class="overflow-x-auto">
+        <div class="inline-block min-w-full align-middle">
+          <div
+            class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg shadow-sm bg-white dark:bg-gray-800"
+          >
+            <table
+              class="min-w-full divide-y divide-gray-200"
+              role="grid"
+              aria-label="Frontend tools list"
+            >
+              <thead class="bg-gray-100 dark:bg-gray-700">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal"
+                    >Icon</th
+                  >
+                  <th
+                    scope="col"
+                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal"
+                    >Name</th
+                  >
+                  <th
+                    scope="col"
+                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell text-base leading-normal"
+                    >Description</th
+                  >
+                  <th
+                    scope="col"
+                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell text-base leading-normal"
+                    >Category</th
+                  >
+                  <th
+                    scope="col"
+                    class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider text-base leading-normal"
+                    >Links</th
+                  >
+                </tr>
+              </thead>
+              <tbody
+                id="toolsTableBody"
+                class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700 [&>tr]:h-[72px] [&>tr:nth-child(even)]:bg-gray-50 dark:[&>tr:nth-child(even)]:bg-gray-700/50"
+              >
+                {
+                  /* TODO: Optimize rendering with pagination or lazy loading on scroll for better performance */
+                }
+                {
+                  tools.map((tool) => (
+                    <ToolCard
+                      icon={tool.icon}
+                      name={tool.name}
+                      description={tool.description}
+                      category={tool.category}
+                      docsLink={tool.docsLink}
+                      githubLink={tool.githubLink}
+                    />
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
-    
+
     <!-- Footer component -->
     <div class="flex flex-col items-center">
       <Footer />
     </div>
-</div>
+  </div>
 
-<script define:vars={{ tools }}>
+  <script define:vars={{ tools }}>
     // Make tools data available to client-side JavaScript
     window.TOOLS_DATA = tools;
-    
+
     // Function to set up lazy loading for images
     function setupLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        const src = img.getAttribute('data-src');
-                        if (src) {
-                            img.setAttribute('src', src);
-                            img.removeAttribute('data-src');
-                        }
-                        observer.unobserve(img);
-                    }
-                });
-            });
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const src = img.getAttribute('data-src');
+              if (src) {
+                img.setAttribute('src', src);
+                img.removeAttribute('data-src');
+              }
+              observer.unobserve(img);
+            }
+          });
+        });
 
-            // Get all images with data-src attribute
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        } else {
-            // Fallback for browsers that don't support Intersection Observer
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                const src = img.getAttribute('data-src');
-                if (src) {
-                    img.setAttribute('src', src);
-                    img.removeAttribute('data-src');
-                }
-            });
-        }
+        // Get all images with data-src attribute
+        document.querySelectorAll('img[data-src]').forEach((img) => {
+          imageObserver.observe(img);
+        });
+      } else {
+        // Fallback for browsers that don't support Intersection Observer
+        document.querySelectorAll('img[data-src]').forEach((img) => {
+          const src = img.getAttribute('data-src');
+          if (src) {
+            img.setAttribute('src', src);
+            img.removeAttribute('data-src');
+          }
+        });
+      }
     }
 
     // Initialize loading state handler
     function initializeLoadingState() {
-        // After page load, execute transition
-        const loadingState = document.getElementById('loadingState');
-        const mainContent = document.getElementById('mainContent');
+      // After page load, execute transition
+      const loadingState = document.getElementById('loadingState');
+      const mainContent = document.getElementById('mainContent');
 
-        if (!loadingState || !mainContent) {
-            console.warn('Required elements not found');
-            return;
+      if (!loadingState || !mainContent) {
+        console.warn('Required elements not found');
+        return;
+      }
+
+      // Set a timeout to ensure content is shown even if loading takes too long
+      const maxLoadingTime = 1500; // Reduced from 3000ms to 1500ms
+      const forceShowTimeout = setTimeout(() => {
+        console.log('Force showing content due to timeout');
+        if (loadingState) {
+          loadingState.style.display = 'none';
+          loadingState.classList.add('opacity-0');
         }
-        
-        // Set a timeout to ensure content is shown even if loading takes too long
-        const maxLoadingTime = 1500; // Reduced from 3000ms to 1500ms
-        const forceShowTimeout = setTimeout(() => {
-            console.log('Force showing content due to timeout');
-            if (loadingState) {
-                loadingState.style.display = 'none';
-                loadingState.classList.add('opacity-0');
-            }
-            if (mainContent) {
-                mainContent.classList.add('content-visible');
-                mainContent.style.display = 'block';
-                mainContent.classList.remove('hidden');
-                mainContent.classList.add('opacity-100');
-                mainContent.classList.remove('opacity-0');
-                // Ensure transform is applied immediately
-                mainContent.style.transform = 'translateY(0) scale(1)';
-            }
-        }, maxLoadingTime);
-        
-        // Setup keyboard navigation for tool cards
-        setupKeyboardNavigation();
-
-        // Initialize search and filter functionality
-        const searchInput = document.getElementById('searchInput');
-        const categoryFilter = document.getElementById('categoryFilter');
-        const toolsTableBody = document.getElementById('toolsTableBody');
-        const toolRows = Array.from(toolsTableBody?.getElementsByTagName('tr') || []);
-
-        function filterTools() {
-            const searchTerm = searchInput?.value?.toLowerCase().trim() || '';
-            const selectedCategory = categoryFilter?.value || 'All';
-
-            toolRows.forEach(row => {
-                const name = row.querySelector('td:nth-child(2)')?.textContent?.toLowerCase() || '';
-                const description = row.querySelector('td:nth-child(3)')?.textContent?.toLowerCase() || '';
-                const category = row.querySelector('td:nth-child(4)')?.textContent?.trim() || '';
-
-                const matchesSearch = searchTerm === '' || name.includes(searchTerm);
-                const matchesCategory = selectedCategory === 'All' || category === selectedCategory;
-
-                row.style.display = matchesSearch && matchesCategory ? '' : 'none';
-            });
+        if (mainContent) {
+          mainContent.classList.add('content-visible');
+          mainContent.style.display = 'block';
+          mainContent.classList.remove('hidden');
+          mainContent.classList.add('opacity-100');
+          mainContent.classList.remove('opacity-0');
+          // Ensure transform is applied immediately
+          mainContent.style.transform = 'translateY(0) scale(1)';
         }
+      }, maxLoadingTime);
 
-        searchInput?.addEventListener('input', filterTools);
-        categoryFilter?.addEventListener('change', filterTools);
+      // Setup keyboard navigation for tool cards
+      setupKeyboardNavigation();
 
-        // Add click handlers for category cells
-        toolRows.forEach(row => {
-            const categoryCell = row.querySelector('td:nth-child(4)');
-            if (categoryCell) {
-                categoryCell.classList.add('cursor-pointer', 'transition-colors', 'duration-150');
-                categoryCell.addEventListener('click', () => {
-                    const category = categoryCell.textContent?.trim() || '';
-                    if (categoryFilter) {
-                        categoryFilter.value = category;
-                        filterTools();
-                    }
-                });
-            }
+      // Initialize search and filter functionality
+      const searchInput = document.getElementById('searchInput');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const toolsTableBody = document.getElementById('toolsTableBody');
+      const toolRows = Array.from(
+        toolsTableBody?.getElementsByTagName('tr') || []
+      );
+
+      function filterTools() {
+        const searchTerm = searchInput?.value?.toLowerCase().trim() || '';
+        const selectedCategory = categoryFilter?.value || 'All';
+
+        toolRows.forEach((row) => {
+          const name =
+            row.querySelector('td:nth-child(2)')?.textContent?.toLowerCase() ||
+            '';
+          const description =
+            row.querySelector('td:nth-child(3)')?.textContent?.toLowerCase() ||
+            '';
+          const category =
+            row.querySelector('td:nth-child(4)')?.textContent?.trim() || '';
+
+          const matchesSearch = searchTerm === '' || name.includes(searchTerm);
+          const matchesCategory =
+            selectedCategory === 'All' || category === selectedCategory;
+
+          row.style.display = matchesSearch && matchesCategory ? '' : 'none';
         });
+      }
 
-        const MIN_LOADING_TIME = 300; // Reduced from 800ms to 300ms
-        const startTime = Date.now();
+      searchInput?.addEventListener('input', filterTools);
+      categoryFilter?.addEventListener('change', filterTools);
 
-        const performTransition = () => {
-            // Clear the force show timeout since we're transitioning normally
-            clearTimeout(forceShowTimeout);
-            
-            if (loadingState && mainContent) {
-                // Prepare content for immediate display
-                mainContent.classList.add('content-visible');
-                mainContent.style.display = 'block';
-                mainContent.classList.remove('hidden');
-                
-                // Use requestAnimationFrame for smoother transition
-                requestAnimationFrame(() => {
-                    // Start fading out loading state immediately
-                    loadingState.classList.add('opacity-0');
-                    
-                    // Start fading in content with minimal delay
-                    requestAnimationFrame(() => {
-                        mainContent.classList.add('opacity-100');
-                        mainContent.classList.remove('opacity-0');
-                        // Apply transform changes for a smooth animation
-                        mainContent.style.transform = 'translateY(0) scale(1)';
-                    });
-                    
-                    // After transition completes, hide loading state completely
-                    setTimeout(() => {
-                        loadingState.style.display = 'none';
-                        console.log('Transition complete - content visible');
-                    }, 300); // Reduced from 700ms to 300ms
-                });
+      // Add click handlers for category cells
+      toolRows.forEach((row) => {
+        const categoryCell = row.querySelector('td:nth-child(4)');
+        if (categoryCell) {
+          categoryCell.classList.add(
+            'cursor-pointer',
+            'transition-colors',
+            'duration-150'
+          );
+          categoryCell.addEventListener('click', () => {
+            const category = categoryCell.textContent?.trim() || '';
+            if (categoryFilter) {
+              categoryFilter.value = category;
+              filterTools();
             }
-        };
+          });
+        }
+      });
 
-        // TODO: Implement lazy loading or pagination for better performance
-        // This could involve:
-        // 1. Implementing infinite scroll with IntersectionObserver
-        // 2. Adding pagination controls
-        // 3. Using virtualized lists for large datasets
+      const MIN_LOADING_TIME = 300; // Reduced from 800ms to 300ms
+      const startTime = Date.now();
 
-        Promise.all([
-            new Promise(resolve => setTimeout(resolve, MIN_LOADING_TIME)),
-            Promise.all(
-                Array.from(document.images)
-                    .filter(img => !img.complete)
-                    .map(img => new Promise((resolve, reject) => {
-                        img.onload = () => resolve(img);
-                        img.onerror = () => {
-                            console.warn(`Failed to load image: ${img.src}`);
-                            resolve(img); // Continue loading other images
-                        };
-                    }))
-            )
-        ]).then(() => {
-            const timeElapsed = Date.now() - startTime;
-            if (timeElapsed >= MIN_LOADING_TIME) {
-                performTransition();
-            } else {
-                setTimeout(performTransition, MIN_LOADING_TIME - timeElapsed);
-            }
-        }).catch(error => {
-            console.error('Error during loading:', error);
-            // Fallback: Show content directly if loading fails
-            if (mainContent) {
-                loadingState?.style.setProperty('display', 'none');
-                mainContent.classList.add('content-visible');
-                mainContent.style.display = 'block';
-                mainContent.classList.remove('hidden');
-                mainContent.classList.add('opacity-100');
-                mainContent.classList.remove('opacity-0');
-            }
-            performTransition();
-            
-            // Set up lazy loading for images
+      const performTransition = () => {
+        // Clear the force show timeout since we're transitioning normally
+        clearTimeout(forceShowTimeout);
+
+        if (loadingState && mainContent) {
+          // Prepare content for immediate display
+          mainContent.classList.add('content-visible');
+          mainContent.style.display = 'block';
+          mainContent.classList.remove('hidden');
+
+          // Use requestAnimationFrame for smoother transition
+          requestAnimationFrame(() => {
+            // Start fading out loading state immediately
+            loadingState.classList.add('opacity-0');
+
+            // Start fading in content with minimal delay
+            requestAnimationFrame(() => {
+              mainContent.classList.add('opacity-100');
+              mainContent.classList.remove('opacity-0');
+              // Apply transform changes for a smooth animation
+              mainContent.style.transform = 'translateY(0) scale(1)';
+            });
+
+            // After transition completes, hide loading state completely
             setTimeout(() => {
-                setupLazyLoading();
-            }, 500); // Wait a bit after the transition
+              loadingState.style.display = 'none';
+              console.log('Transition complete - content visible');
+            }, 300); // Reduced from 700ms to 300ms
+          });
+        }
+      };
+
+      // TODO: Implement lazy loading or pagination for better performance
+      // This could involve:
+      // 1. Implementing infinite scroll with IntersectionObserver
+      // 2. Adding pagination controls
+      // 3. Using virtualized lists for large datasets
+
+      Promise.all([
+        new Promise((resolve) => setTimeout(resolve, MIN_LOADING_TIME)),
+        Promise.all(
+          Array.from(document.images)
+            .filter((img) => !img.complete)
+            .map(
+              (img) =>
+                new Promise((resolve, reject) => {
+                  img.onload = () => resolve(img);
+                  img.onerror = () => {
+                    console.warn(`Failed to load image: ${img.src}`);
+                    resolve(img); // Continue loading other images
+                  };
+                })
+            )
+        ),
+      ])
+        .then(() => {
+          const timeElapsed = Date.now() - startTime;
+          if (timeElapsed >= MIN_LOADING_TIME) {
+            performTransition();
+          } else {
+            setTimeout(performTransition, MIN_LOADING_TIME - timeElapsed);
+          }
+        })
+        .catch((error) => {
+          console.error('Error during loading:', error);
+          // Fallback: Show content directly if loading fails
+          if (mainContent) {
+            loadingState?.style.setProperty('display', 'none');
+            mainContent.classList.add('content-visible');
+            mainContent.style.display = 'block';
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('opacity-100');
+            mainContent.classList.remove('opacity-0');
+          }
+          performTransition();
+
+          // Set up lazy loading for images
+          setTimeout(() => {
+            setupLazyLoading();
+          }, 500); // Wait a bit after the transition
         });
     }
 
     // Setup keyboard navigation for tool cards
     function setupKeyboardNavigation() {
-        const toolRows = document.querySelectorAll('#toolsTableBody tr');
-        
-        toolRows.forEach((row, index) => {
-            row.addEventListener('keydown', (e) => {
-                // Handle Enter key to activate links
-                if (e.key === 'Enter') {
-                    const docsLink = row.querySelector('a[aria-label*="documentation"]');
-                    if (docsLink) {
-                        docsLink.click();
-                    }
-                }
-                
-                // Handle arrow keys for navigation
-                if (e.key === 'ArrowDown' && index < toolRows.length - 1) {
-                    e.preventDefault();
-                    toolRows[index + 1].focus();
-                }
-                
-                if (e.key === 'ArrowUp' && index > 0) {
-                    e.preventDefault();
-                    toolRows[index - 1].focus();
-                }
-            });
+      const toolRows = document.querySelectorAll('#toolsTableBody tr');
+
+      toolRows.forEach((row, index) => {
+        row.addEventListener('keydown', (e) => {
+          // Handle Enter key to activate links
+          if (e.key === 'Enter') {
+            const docsLink = row.querySelector(
+              'a[aria-label*="documentation"]'
+            );
+            if (docsLink) {
+              docsLink.click();
+            }
+          }
+
+          // Handle arrow keys for navigation
+          if (e.key === 'ArrowDown' && index < toolRows.length - 1) {
+            e.preventDefault();
+            toolRows[index + 1].focus();
+          }
+
+          if (e.key === 'ArrowUp' && index > 0) {
+            e.preventDefault();
+            toolRows[index - 1].focus();
+          }
         });
+      });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeLoadingState();
-            // Set up lazy loading for the initial images
-            setupLazyLoading();
-        });
-    } else {
+      document.addEventListener('DOMContentLoaded', () => {
         initializeLoadingState();
         // Set up lazy loading for the initial images
         setupLazyLoading();
+      });
+    } else {
+      initializeLoadingState();
+      // Set up lazy loading for the initial images
+      setupLazyLoading();
     }
-    
-    // Re-initialize keyboard navigation after view transitions
-    document.addEventListener('astro:page-load', function() {
-        setupKeyboardNavigation();
-    });
-</script>
 
-<script>
-    const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
-    const toolsTableBody = document.getElementById('toolsTableBody') as HTMLTableSectionElement;
+    // Re-initialize keyboard navigation after view transitions
+    document.addEventListener('astro:page-load', function () {
+      setupKeyboardNavigation();
+    });
+  </script>
+
+  <script>
+    const categoryFilter = document.getElementById(
+      'categoryFilter'
+    ) as HTMLSelectElement;
+    const toolsTableBody = document.getElementById(
+      'toolsTableBody'
+    ) as HTMLTableSectionElement;
 
     function filterTools() {
-        if (!categoryFilter || !toolsTableBody) return;
+      if (!categoryFilter || !toolsTableBody) return;
 
-        const selectedCategory = categoryFilter.value;
-        const rows = toolsTableBody.getElementsByTagName('tr');
+      const selectedCategory = categoryFilter.value;
+      const rows = toolsTableBody.getElementsByTagName('tr');
 
-        Array.from(rows).forEach((row: HTMLTableRowElement) => {
-            const categoryCell = row.querySelector('td:nth-child(4)');
-            if (!categoryCell) return;
+      Array.from(rows).forEach((row: HTMLTableRowElement) => {
+        const categoryCell = row.querySelector('td:nth-child(4)');
+        if (!categoryCell) return;
 
-            const rowCategory = categoryCell.textContent?.trim() || '';
-            const shouldShow = selectedCategory === 'All' || rowCategory === selectedCategory;
+        const rowCategory = categoryCell.textContent?.trim() || '';
+        const shouldShow =
+          selectedCategory === 'All' || rowCategory === selectedCategory;
 
-            row.classList.toggle('hidden', !shouldShow);
-            if (shouldShow) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+        row.classList.toggle('hidden', !shouldShow);
+        if (shouldShow) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
     }
 
     categoryFilter?.addEventListener('change', filterTools);
     // Initial filter if elements exist
     if (categoryFilter && toolsTableBody) {
-        filterTools();
+      filterTools();
     }
-</script>
+  </script>
 
-<style is:global>
+  <style is:global>
     /* Font classes moved to src/styles/fonts.css */
     /* Additional component-specific styles can be added here */
-    
+
     /* Apply consistent sizing to elements */
     .table th {
-        @apply text-base leading-normal;
+      @apply text-base leading-normal;
     }
-    
+
     /* Ensure consistent sizing for important text elements */
     .tool-name {
-        @apply text-base leading-normal;
+      @apply text-base leading-normal;
     }
-</style>
+  </style>
+</div>
