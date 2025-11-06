@@ -5,7 +5,7 @@ export const react: Tool = {
   name: 'React',
   description:
     'A JavaScript library for building user interfaces with reusable components',
-  category: 'UI Library',
+  category: 'Frontend Framework',
   docsLink: 'https://reactjs.org',
   githubLink: 'https://github.com/facebook/react',
 };

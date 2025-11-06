@@ -60,9 +60,11 @@ import { vue } from './vue';
 import { webdriverio } from './webdriverio';
 import { webpack } from './webpack';
 import { yarn } from './yarn';
+import { tanstack } from './tanstack';
 
 // Export all tools sorted alphabetically by name
 export const tools: Tool[] = [
+  tanstack,
   moon,
   storybook,
   webpack,
